@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>📖 Comprehensible Input — Spanish</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --cream: #f5efe6;
+  --terra: #c25a3a;
+  --terra-light: #d98a72;
+  --terra-dark: #8f3a22;
+  --ink: #2c2420;
+  --ink-soft: #5c4a42;
+  --gold: #c9a84c;
+  --gold-light: #e8d48b;
+  --sage: #6b8e72;
+  --sage-light: #a3c4a8;
+  --card-bg: #fffaf4;
+  --shadow: 0 2px 24px rgba(44,36,32,.10);
+  --shadow-lg: 0 8px 48px rgba(44,36,32,.18);
+  --r: 14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ───── HEADER ───── */
+.header {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 28px 24px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent, transparent 40px,
+    rgba(201,168,76,.06) 40px, rgba(201,168,76,.06) 41px
+  );
+  pointer-events: none;
+}
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -.5px;
+  position: relative;
+}
+.header h1 .flag { font-style: normal; margin: 0 6px; }
+.header .subtitle {
+  font-size: .85rem;
+  color: var(--terra-light);
+  margin-top: 4px;
+  font-weight: 300;
+  position: relative;
+}
+
+/* ───── TABS ───── */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  background: var(--ink);
+  padding: 0 24px 0;
+  position: relative;
+  z-index: 1;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  color: rgba(245,239,230,.45);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: .82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  padding: 14px 22px 12px;
+  cursor: pointer;
+  border-bottom: 2.5px solid transparent;
+  transition: color .25s, border-color .25s;
+  position: relative;
+}
+.tab-btn:hover { color: rgba(245,239,230,.75); }
+.tab-btn.active {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold);
+}
+
+/* ───── CONTROLS BAR ───── */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 20px;
+  background: var(--card-bg);
+  box-shadow: 0 2px 12px rgba(44,36,32,.07);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.controls button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1.5px solid var(--terra);
+  background: transparent;
+  color: var(--terra-dark);
+  cursor: pointer;
+  transition: all .2s;
+}
+.controls button:hover, .controls button.active-btn {
+  background: var(--terra);
+  color: #fff;
+}
+.voice-select {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: .78rem;
+  font-weight: 600;
+  padding: 8px 24px 8px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--terra);
+  background: transparent;
+  color: var(--terra-dark);
+  cursor: pointer;
+  outline: none;
+  max-width: 160px;
+  text-overflow: ellipsis;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23c25a3a%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 8px;
+}
+.controls .page-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.controls .page-nav input {
+  width: 46px;
+  text-align: center;
+  border: 1.5px solid #d4c4b0;
+  border-radius: 6px;
+  padding: 5px 4px;
+  font-size: .82rem;
+  font-family: 'Source Sans 3', sans-serif;
+  background: #fff;
+}
+.controls .page-label {
+  font-size: .75rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.progress-bar-wrap {
+  width: 100%;
+  height: 4px;
+  background: #e0d6c8;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--terra), var(--gold));
+  border-radius: 2px;
+  transition: width .4s ease;
+}
+
+/* ───── MAIN CONTENT AREA ───── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ───── READING TAB ───── */
+.sentences-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+.sentence-card {
+  background: var(--card-bg);
+  border-radius: var(--r);
+  padding: 22px 24px 18px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  position: relative;
+  transition: transform .15s, box-shadow .15s;
+  border-left: 3.5px solid transparent;
+}
+.sentence-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+.sentence-card.read { border-left-color: var(--sage); }
+.sentence-card.read .mark-read { background: var(--sage); }
+.sentence-card .card-num {
+  position: absolute;
+  top: 10px; right: 14px;
+  font-size: .68rem;
+  color: #b8a898;
+  font-weight: 600;
+  letter-spacing: .5px;
+}
+
+/* sentence row */
+.sentence-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.play-btn {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--terra);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s, transform .15s;
+  margin-top: 2px;
+}
+.play-btn:hover { background: var(--terra-dark); transform: scale(1.08); }
+.play-btn.playing { background: var(--gold); animation: pulse .6s infinite alternate; }
+@keyframes pulse { to { transform: scale(1.12); } }
+.play-btn svg { width: 14px; height: 14px; fill: #fff; }
+
+.sentence-text {
+  flex: 1;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.22rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.sentence-text .word { display: inline; }
+.sentence-text .word-new { color: var(--terra-dark); font-weight: 600; }
+.sentence-text .verb-new { color: var(--terra-dark); font-weight: 700; font-style: italic; }
+
+/* annotation popups */
+.annotation {
+  display: inline-block;
+  position: relative;
+  margin: 0 1px;
+}
+.annotation .ann-trigger {
+  border-bottom: 1.5px dotted var(--terra-light);
+  cursor: pointer;
+  padding-bottom: 1px;
+}
+.annotation .ann-box {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--cream);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: .76rem;
+  white-space: nowrap;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  pointer-events: none;
+  animation: fadeUp .18s ease;
+}
+.annotation .ann-box::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--ink);
+}
+.annotation:hover .ann-box,
+.annotation.open .ann-box { display: block; }
+@keyframes fadeUp { from { opacity:0; transform: translateX(-50%) translateY(6px); } to { opacity:1; transform: translateX(-50%) translateY(0); } }
+
+.ann-box .ann-meaning { font-weight: 600; color: var(--gold-light); }
+.ann-box .ann-type {
+  display: inline-block;
+  background: rgba(194,90,58,.35);
+  color: var(--terra-light);
+  font-size: .64rem;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-left: 5px;
+}
+.ann-box .ann-type.verb-tag { background: rgba(107,142,114,.35); color: var(--sage-light); }
+
+/* conjugation detail */
+.conj-detail {
+  display: none;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: rgba(107,142,114,.08);
+  border-radius: 8px;
+  border: 1px solid rgba(107,142,114,.2);
+  font-size: .76rem;
+}
+.annotation.open .conj-detail { display: block; }
+.conj-detail .conj-title {
+  font-weight: 600;
+  color: var(--sage);
+  margin-bottom: 4px;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+}
+.conj-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 16px;
+  font-size: .73rem;
+  color: var(--ink-soft);
+}
+.conj-grid .conj-row { display: flex; gap: 6px; }
+.conj-grid .conj-pronoun { color: #9a8a7a; width: 50px; flex-shrink: 0; }
+.conj-grid .conj-form { font-weight: 600; color: var(--ink); }
+.conj-grid .conj-form.highlight { color: var(--terra-dark); }
+
+/* card bottom row */
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid #e8ddd0;
+}
+.reveal-btn {
+  background: none;
+  border: 1px solid #d4c4b0;
+  color: var(--ink-soft);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: .72rem;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.reveal-btn:hover { border-color: var(--terra-light); color: var(--terra); }
+.translation {
+  font-size: .82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  max-width: 55%;
+  text-align: right;
+  transition: color .25s;
+}
+.translation.hidden { color: var(--cream); }
+.mark-read {
+  background: #d4c4b0;
+  border: none;
+  color: var(--ink);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: .7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  padding: 5px 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.mark-read:hover { background: var(--sage-light); color: #fff; }
+.sentence-card.read .mark-read { background: var(--sage); color: #fff; cursor: default; }
+
+/* ───── SRS TAB ───── */
+.srs-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+.srs-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.srs-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.srs-header p {
+  font-size: .8rem;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+.srs-stats {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+.srs-stat {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 10px 18px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  flex: 1;
+  max-width: 140px;
+}
+.srs-stat .stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.srs-stat .stat-label {
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+.stat-num.due { color: var(--terra); }
+.stat-num.learned { color: var(--sage); }
+.stat-num.total { color: var(--gold); }
+
+/* flashcard */
+.flashcard-wrap {
+  position: relative;
+  perspective: 1000px;
+}
+.flashcard {
+  background: var(--card-bg);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-lg);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 28px;
+  cursor: pointer;
+  transition: transform .5s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+
+.card-front, .card-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 28px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.card-back { transform: rotateY(180deg); }
+
+.card-front .card-type-badge {
+  background: rgba(194,90,58,.12);
+  color: var(--terra-dark);
+  font-size: .66rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+.card-type-badge.conj-badge { background: rgba(107,142,114,.12); color: var(--sage); }
+
+.card-front .card-word {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.3;
+}
+.card-front .card-hint {
+  font-size: .75rem;
+  color: #b8a898;
+  margin-top: 14px;
+  font-style: italic;
+}
+
+.card-back .card-answer {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.4;
+}
+.card-back .card-answer-label {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+.card-back .conj-table-mini {
+  margin-top: 18px;
+  font-size: .72rem;
+  color: var(--ink-soft);
+  text-align: center;
+  line-height: 1.8;
+}
+.card-back .conj-table-mini .ct-row { display: flex; gap: 8px; justify-content: center; }
+.card-back .conj-table-mini .ct-pro { color: #9a8a7a; width: 44px; text-align: right; }
+.card-back .conj-table-mini .ct-form { font-weight: 600; color: var(--ink); }
+.card-back .conj-table-mini .ct-form.hl { color: var(--terra); }
+
+.card-back .card-example {
+  margin-top: 20px;
+  font-size: .76rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+/* srs buttons */
+.srs-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+.srs-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  padding: 11px 28px;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .2s;
+}
+.srs-btn:hover { transform: translateY(-1px); }
+.srs-btn.again { background: #e8736a; color: #fff; }
+.srs-btn.hard { background: #d4c4b0; color: var(--ink); }
+.srs-btn.good { background: var(--sage); color: #fff; }
+.srs-btn.easy { background: var(--gold); color: var(--ink); }
+
+.srs-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--ink-soft);
+}
+.srs-empty .empty-icon { font-size: 2.8rem; margin-bottom: 12px; }
+.srs-empty h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 6px; }
+.srs-empty p { font-size: .8rem; }
+
+/* queue list */
+.queue-list {
+  margin-top: 30px;
+  display: none;
+}
+.queue-list.show { display: block; }
+.queue-list h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: .9rem;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.queue-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--card-bg);
+  border-radius: 8px;
+  margin-bottom: 5px;
+  font-size: .76rem;
+  box-shadow: 0 1px 4px rgba(44,36,32,.06);
+}
+.queue-item .qi-word { font-weight: 600; color: var(--ink); }
+.queue-item .qi-meaning { color: var(--ink-soft); font-style: italic; }
+.queue-item .qi-due { font-size: .65rem; color: var(--terra-light); text-transform: uppercase; letter-spacing: .5px; }
+
+/* ───── FOOTER ───── */
+.footer {
+  text-align: center;
+  padding: 24px;
+  font-size: .72rem;
+  color: #b8a898;
+}
+.footer a { color: var(--terra-light); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* ───── TOAST ───── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--ink);
+  color: var(--cream);
+  padding: 10px 22px;
+  border-radius: 24px;
+  font-size: .76rem;
+  font-weight: 500;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+  z-index: 999;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* mobile */
+@media (max-width: 520px) {
+  .sentence-card { padding: 16px 16px 14px; }
+  .sentence-text { font-size: 1.05rem; }
+  .card-bottom { flex-direction: column; gap: 8px; align-items: flex-start; }
+  .translation { max-width: 100%; text-align: left; }
+  .srs-actions { flex-wrap: wrap; gap: 8px; }
+  .srs-btn { padding: 9px 18px; font-size: .72rem; }
+}
+
+/* ───── LEVEL FILTER BAR ───── */
+.level-filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 16px 6px;
+  background: var(--card-bg);
+  border-bottom: 1px solid rgba(44,36,32,.08);
+}
+.level-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all .2s;
+  background: #eee8df;
+  color: var(--ink-soft);
+}
+.level-btn:hover { background: #e0d8cc; }
+.level-btn.active {
+  border-color: var(--terra);
+  background: var(--terra);
+  color: #fff;
+}
+.level-btn[data-level="A1"].active { background: #6b8e72; border-color: #6b8e72; }
+.level-btn[data-level="A2"].active { background: #5a7ea8; border-color: #5a7ea8; }
+.level-btn[data-level="B1"].active { background: #c9a84c; border-color: #c9a84c; }
+.level-btn[data-level="B2"].active { background: #c25a3a; border-color: #c25a3a; }
+.level-btn[data-level="C1"].active { background: #7b4faa; border-color: #7b4faa; }
+.level-btn[data-level="ALL"].active { background: var(--ink); border-color: var(--ink); }
+
+/* ───── LEVEL BADGE ON CARDS ───── */
+.level-badge {
+  display: inline-block;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.level-badge.A1 { background: #d4edda; color: #155724; }
+.level-badge.A2 { background: #cce5ff; color: #004085; }
+.level-badge.B1 { background: #fff3cd; color: #856404; }
+.level-badge.B2 { background: #f8d7da; color: #721c24; }
+.level-badge.C1 { background: #e8d5f5; color: #4a1d6e; }
+
+/* ───── GRAMMAR FOCUS TAG ───── */
+.focus-tag {
+  display: block;
+  font-size: .7rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-top: 5px;
+  opacity: .7;
+}
+
+/* ───── MULTI-TENSE VERB POPUP ───── */
+.tense-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-bottom: 6px;
+}
+.tense-tab {
+  font-size: .62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #f5f0eb;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all .15s;
+}
+.tense-tab:hover { background: #ebe4dc; }
+.tense-tab.active {
+  background: var(--terra);
+  color: #fff;
+  border-color: var(--terra);
+}
+.conj-detail .conj-tense-panel { display: none; }
+.conj-detail .conj-tense-panel.active { display: block; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <h1><span class="flag">🇪🇸</span> Comprehensible Input — Spanish <span class="flag">📖</span></h1>
+  <p class="subtitle">Build sentences naturally · one new word at a time</p>
+</header>
+
+<!-- TABS -->
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="reading">📖 Reading</button>
+  <button class="tab-btn" data-tab="srs">🔁 SRS Review</button>
+</nav>
+
+<!-- READING PANEL -->
+<div class="tab-panel active" id="panel-reading">
+  <div class="controls" id="reading-controls">
+    <button id="btn-find-unread">Find Next Unread</button>
+    <button id="btn-mark-all">Mark Page Read</button>
+    <select id="voice-select" class="voice-select">
+      <option value="">Auto-detect Voice</option>
+    </select>
+    <div class="page-nav">
+      <span class="page-label">Page</span>
+      <input type="number" id="page-input" value="1" min="1"/>
+      <span class="page-label" id="page-total">/ 1</span>
+    </div>
+  </div>
+  <div class="level-filter" id="level-filter">
+    <button class="level-btn active" data-level="ALL" onclick="setLevel('ALL')">All</button>
+    <button class="level-btn" data-level="A1" onclick="setLevel('A1')">A1</button>
+    <button class="level-btn" data-level="A2" onclick="setLevel('A2')">A2</button>
+    <button class="level-btn" data-level="B1" onclick="setLevel('B1')">B1</button>
+    <button class="level-btn" data-level="B2" onclick="setLevel('B2')">B2</button>
+    <button class="level-btn" data-level="C1" onclick="setLevel('C1')">C1</button>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+  <div class="sentences-wrap" id="sentences-container"></div>
+</div>
+
+<!-- SRS PANEL -->
+<div class="tab-panel" id="panel-srs">
+  <div class="srs-wrap">
+    <div class="srs-header">
+      <h2>Spaced Repetition</h2>
+      <p>Review vocabulary &amp; verb conjugations as you encounter them</p>
+    </div>
+    <div class="srs-stats">
+      <div class="srs-stat"><div class="stat-num due" id="stat-due">0</div><div class="stat-label">Due</div></div>
+      <div class="srs-stat"><div class="stat-num learned" id="stat-learned">0</div><div class="stat-label">Learned</div></div>
+      <div class="srs-stat"><div class="stat-num total" id="stat-total">0</div><div class="stat-label">Total</div></div>
+    </div>
+    <div id="srs-card-area">
+      <div class="srs-empty" id="srs-empty">
+        <div class="empty-icon">🌿</div>
+        <h3>Nothing to review yet</h3>
+        <p>Start reading sentences to add words &amp; conjugations here</p>
+      </div>
+    </div>
+    <div class="queue-list" id="queue-list">
+      <h3>Upcoming reviews</h3>
+      <div id="queue-items"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<footer class="footer">
+  Words &amp; sentences built from high-frequency Spanish vocabulary · 2025 · Comprehensible Input Project
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// DATA: VOCABULARY + VERB CONJUGATIONS + SENTENCES
+// ═══════════════════════════════════════════════════════════════
+
+const VOCAB = {
+  // pronouns & articles
+  "yo":      { meaning:"I", type:"pronoun" },
+  "tú":      { meaning:"you (informal)", type:"pronoun" },
+  "él":      { meaning:"he", type:"pronoun" },
+  "ella":    { meaning:"she", type:"pronoun" },
+  "nosotros":{ meaning:"we", type:"pronoun" },
+  "ellos":   { meaning:"they (masc.)", type:"pronoun" },
+  "ellas":   { meaning:"they (fem.)", type:"pronoun" },
+  "usted":   { meaning:"you (formal)", type:"pronoun" },
+  "el":      { meaning:"the (masc.)", type:"article" },
+  "la":      { meaning:"the (fem.)", type:"article" },
+  "los":     { meaning:"the (masc. pl.)", type:"article" },
+  "las":     { meaning:"the (fem. pl.)", type:"article" },
+  "un":      { meaning:"a / one (masc.)", type:"article" },
+  "una":     { meaning:"a / one (fem.)", type:"article" },
+  "unos":    { meaning:"some (masc.)", type:"article" },
+  "unas":    { meaning:"some (fem.)", type:"article" },
+  // common nouns
+  "casa":    { meaning:"house", type:"noun" },
+  "libro":   { meaning:"book", type:"noun" },
+  "agua":    { meaning:"water", type:"noun" },
+  "tiempo":  { meaning:"time / weather", type:"noun" },
+  "día":     { meaning:"day", type:"noun" },
+  "noche":   { meaning:"night", type:"noun" },
+  "mundo":   { meaning:"world", type:"noun" },
+  "hombre":  { meaning:"man", type:"noun" },
+  "mujer":   { meaning:"woman", type:"noun" },
+  "niño":    { meaning:"child / boy", type:"noun" },
+  "niña":    { meaning:"girl", type:"noun" },
+  "ciudad":  { meaning:"city", type:"noun" },
+  "padre":   { meaning:"father", type:"noun" },
+  "madre":   { meaning:"mother", type:"noun" },
+  "amigo":   { meaning:"friend (masc.)", type:"noun" },
+  "amiga":   { meaning:"friend (fem.)", type:"noun" },
+  "trabajo": { meaning:"work / job", type:"noun" },
+  "comida":  { meaning:"food", type:"noun" },
+  "forma":   { meaning:"form / way", type:"noun" },
+  "vida":    { meaning:"life", type:"noun" },
+  "cosa":    { meaning:"thing", type:"noun" },
+  "lugar":   { meaning:"place", type:"noun" },
+  "nombre":  { meaning:"name", type:"noun" },
+  "momento": { meaning:"moment", type:"noun" },
+  "manera":  { meaning:"way / manner", type:"noun" },
+  "parte":   { meaning:"part", type:"noun" },
+  "pueblo":  { meaning:"town / people", type:"noun" },
+  "calle":   { meaning:"street", type:"noun" },
+  "mesa":    { meaning:"table", type:"noun" },
+  "mano":    { meaning:"hand", type:"noun" },
+  "corazón": { meaning:"heart", type:"noun" },
+  "ojos":    { meaning:"eyes", type:"noun" },
+  "tierra":  { meaning:"earth / land", type:"noun" },
+  "sol":     { meaning:"sun", type:"noun" },
+  "cielo":   { meaning:"sky", type:"noun" },
+  "lluvia":  { meaning:"rain", type:"noun" },
+  "escuela": { meaning:"school", type:"noun" },
+  "clase":   { meaning:"class", type:"noun" },
+  "libro":   { meaning:"book", type:"noun" },
+  "hermano": { meaning:"brother", type:"noun" },
+  "hermana": { meaning:"sister", type:"noun" },
+  "hijo":    { meaning:"son", type:"noun" },
+  "hija":    { meaning:"daughter", type:"noun" },
+  "dinero":  { meaning:"money", type:"noun" },
+  "mañana":  { meaning:"morning / tomorrow", type:"noun" },
+  "tarde":   { meaning:"afternoon / late", type:"noun" },
+  "año":     { meaning:"year", type:"noun" },
+  "mes":     { meaning:"month", type:"noun" },
+  "hora":    { meaning:"hour / time", type:"noun" },
+  "problema":{ meaning:"problem", type:"noun" },
+  "padre":   { meaning:"father", type:"noun" },
+  "persona": { meaning:"person", type:"noun" },
+  // adjectives
+  "bueno":   { meaning:"good", type:"adjective" },
+  "grande":  { meaning:"big / great", type:"adjective" },
+  "nuevo":   { meaning:"new", type:"adjective" },
+  "pequeño": { meaning:"small", type:"adjective" },
+  "viejo":   { meaning:"old", type:"adjective" },
+  "bonito":  { meaning:"pretty", type:"adjective" },
+  "malo":    { meaning:"bad", type:"adjective" },
+  "largo":   { meaning:"long", type:"adjective" },
+  "alto":    { meaning:"tall / high", type:"adjective" },
+  "bajo":    { meaning:"short / low", type:"adjective" },
+  "feliz":   { meaning:"happy", type:"adjective" },
+  "triste":  { meaning:"sad", type:"adjective" },
+  "importante":{ meaning:"important", type:"adjective" },
+  "mismo":   { meaning:"same / itself", type:"adjective" },
+  "mejor":   { meaning:"better / best", type:"adjective" },
+  "peor":    { meaning:"worse / worst", type:"adjective" },
+  "mucho":   { meaning:"much / a lot", type:"adjective" },
+  "poco":    { meaning:"little / few", type:"adjective" },
+  "todo":    { meaning:"all / everything", type:"adjective" },
+  "cada":    { meaning:"each / every", type:"adjective" },
+  "mismo":   { meaning:"same", type:"adjective" },
+  "buena":   { meaning:"good (fem.)", type:"adjective" },
+  "grande":  { meaning:"big", type:"adjective" },
+  // adverbs & prepositions
+  "muy":     { meaning:"very", type:"adverb" },
+  "bien":    { meaning:"well", type:"adverb" },
+  "mal":     { meaning:"badly", type:"adverb" },
+  "aquí":    { meaning:"here", type:"adverb" },
+  "allí":    { meaning:"there", type:"adverb" },
+  "ahora":   { meaning:"now", type:"adverb" },
+  "nunca":   { meaning:"never", type:"adverb" },
+  "siempre": { meaning:"always", type:"adverb" },
+  "también": { meaning:"also / too", type:"adverb" },
+  "solo":    { meaning:"only / alone", type:"adverb" },
+  "mucho":   { meaning:"much", type:"adverb" },
+  "en":      { meaning:"in / on", type:"preposition" },
+  "de":      { meaning:"of / from", type:"preposition" },
+  "con":     { meaning:"with", type:"preposition" },
+  "para":    { meaning:"for", type:"preposition" },
+  "por":     { meaning:"for / because of", type:"preposition" },
+  "que":     { meaning:"that / what", type:"conjunction" },
+  "como":    { meaning:"like / how", type:"conjunction" },
+  "y":       { meaning:"and", type:"conjunction" },
+  "pero":    { meaning:"but", type:"conjunction" },
+  "porque":  { meaning:"because", type:"conjunction" },
+  "si":      { meaning:"if", type:"conjunction" },
+  "cuando":  { meaning:"when", type:"conjunction" },
+  "donde":   { meaning:"where", type:"conjunction" },
+  "no":      { meaning:"no / not", type:"adverb" },
+  "sí":      { meaning:"yes", type:"adverb" },
+  "qué":     { meaning:"what", type:"adverb" },
+  "cómo":    { meaning:"how", type:"adverb" },
+  "dónde":   { meaning:"where", type:"adverb" },
+  "quién":   { meaning:"who", type:"adverb" },
+  "todo":    { meaning:"all", type:"adjective" },
+  "muy":     { meaning:"very", type:"adverb" },
+  "mi":      { meaning:"my", type:"determiner" },
+  "su":      { meaning:"your / his / her", type:"determiner" },
+  "este":    { meaning:"this (masc.)", type:"determiner" },
+  "esta":    { meaning:"this (fem.)", type:"determiner" },
+  "ese":     { meaning:"that (masc.)", type:"determiner" },
+  "esa":     { meaning:"that (fem.)", type:"determiner" },
+  "estos":   { meaning:"these", type:"determiner" },
+  "a":       { meaning:"to", type:"preposition" },
+  "desde":   { meaning:"from / since", type:"preposition" },
+  "hasta":   { meaning:"until", type:"preposition" },
+  "sin":     { meaning:"without", type:"preposition" },
+  "sobre":   { meaning:"about / on top of", type:"preposition" },
+  "entre":   { meaning:"between", type:"preposition" },
+  "nos":     { meaning:"us (object)", type:"pronoun" },
+  "lo":      { meaning:"it (masc.)", type:"pronoun" },
+  "la":      { meaning:"it / her", type:"pronoun" },
+  "me":      { meaning:"me", type:"pronoun" },
+  "te":      { meaning:"you (obj.)", type:"pronoun" },
+  "le":      { meaning:"him / her (obj.)", type:"pronoun" },
+  "se":      { meaning:"himself / herself", type:"pronoun" },
+  "este":    { meaning:"this", type:"determiner" },
+  "nuestro": { meaning:"our", type:"determiner" },
+  "otro":    { meaning:"other", type:"adjective" },
+  "todos":   { meaning:"all (pl.)", type:"adjective" },
+  "nada":    { meaning:"nothing", type:"pronoun" },
+  "algo":    { meaning:"something", type:"pronoun" },
+  "alguien": { meaning:"someone", type:"pronoun" },
+  "nadie":   { meaning:"nobody", type:"pronoun" },
+  "todo":    { meaning:"everything", type:"pronoun" },
+  "ya":      { meaning:"already", type:"adverb" },
+  "todavía": { meaning:"still / yet", type:"adverb" },
+  "después": { meaning:"after / later", type:"adverb" },
+  "antes":   { meaning:"before", type:"adverb" },
+  "cerca":   { meaning:"near / close", type:"adverb" },
+  "lejos":   { meaning:"far", type:"adverb" },
+  "dentro":  { meaning:"inside", type:"adverb" },
+  "fuera":   { meaning:"outside", type:"adverb" },
+  "arriba":  { meaning:"up / above", type:"adverb" },
+  "abajo":   { meaning:"down / below", type:"adverb" },
+// ═══ NEW VOCAB (A2–C1) — appended after original VOCAB ═══
+  // A2 — time, reflexive, shopping, daily life
+  "ayer":       { meaning:"yesterday", type:"adverb" },
+  "anoche":     { meaning:"last night", type:"adverb" },
+  "esta mañana":{ meaning:"this morning", type:"expression" },
+  "hace":       { meaning:"ago (time)", type:"expression" },
+  "todavía":    { meaning:"still / yet", type:"adverb" },
+  "ya":         { meaning:"already", type:"adverb" },
+  "mucho":      { meaning:"much / a lot", type:"adjective" },
+  "poco":       { meaning:"a little", type:"adjective" },
+  "siempre":    { meaning:"always", type:"adverb" },
+  "nunca":      { meaning:"never", type:"adverb" },
+  "primero":    { meaning:"first", type:"adverb" },
+  "después":    { meaning:"after / then", type:"adverb" },
+  "mío":        { meaning:"mine", type:"pronoun" },
+  "tuyo":       { meaning:"yours", type:"pronoun" },
+  "suyo":       { meaning:"his/her/your (formal)", type:"pronoun" },
+  "tienda":     { meaning:"store / shop", type:"noun" },
+  "precio":     { meaning:"price", type:"noun" },
+  "producto":   { meaning:"product", type:"noun" },
+  "leche":      { meaning:"milk", type:"noun" },
+  "pan":        { meaning:"bread", type:"noun" },
+  "coche":      { meaning:"car", type:"noun" },
+  "transporte": { meaning:"transport", type:"noun" },
+  "libro":      { meaning:"book", type:"noun" },
+  "mensaje":    { meaning:"message", type:"noun" },
+  "cosa":       { meaning:"thing", type:"noun" },
+  "largo":      { meaning:"long", type:"adjective" },
+  "rápido":     { meaning:"fast", type:"adjective" },
+  "cansado":    { meaning:"tired", type:"adjective" },
+  "nuevo":      { meaning:"new", type:"adjective" },
+  "abierto":    { meaning:"open", type:"adjective" },
+  // B1 — opinions, advice, future, experience
+  "opinión":    { meaning:"opinion", type:"noun" },
+  "educación":  { meaning:"education", type:"noun" },
+  "experiencia":{ meaning:"experience", type:"noun" },
+  "lugar":      { meaning:"place", type:"noun" },
+  "doctor":     { meaning:"doctor", type:"noun" },
+  "descanso":   { meaning:"rest", type:"noun" },
+  "idioma":     { meaning:"language", type:"noun" },
+  "música":     { meaning:"music", type:"noun" },
+  "problema":   { meaning:"problem", type:"noun" },
+  "joven":      { meaning:"young", type:"adjective" },
+  "interesante":{ meaning:"interesting", type:"adjective" },
+  "importante": { meaning:"important", type:"adjective" },
+  "difícil":    { meaning:"difficult", type:"adjective" },
+  "verdad":     { meaning:"truth", type:"noun" },
+  "antes":      { meaning:"before", type:"adverb" },
+  "cuando":     { meaning:"when", type:"conjunction" },
+  "alguien":    { meaning:"someone", type:"pronoun" },
+  // B2 — essays, passive, abstract
+  "medio ambiente":{ meaning:"environment", type:"noun" },
+  "sociedad":   { meaning:"society", type:"noun" },
+  "gobierno":   { meaning:"government", type:"noun" },
+  "ciudadanos": { meaning:"citizens", type:"noun" },
+  "tecnología": { meaning:"technology", type:"noun" },
+  "recursos":   { meaning:"resources", type:"noun" },
+  "inversión":  { meaning:"investment", type:"noun" },
+  "sistema":    { meaning:"system", type:"noun" },
+  "forma":      { meaning:"form / way", type:"noun" },
+  "expertos":   { meaning:"experts", type:"noun" },
+  "avances":    { meaning:"advances", type:"noun" },
+  "esperanza":  { meaning:"hope", type:"noun" },
+  "situación":  { meaning:"situation", type:"noun" },
+  "complejo":   { meaning:"complex", type:"adjective" },
+  "positivo":   { meaning:"positive", type:"adjective" },
+  "económico":  { meaning:"economic", type:"adjective" },
+  "social":     { meaning:"social", type:"adjective" },
+  "desarrollado":{ meaning:"developed", type:"adjective" },
+  "obvio":      { meaning:"obvious", type:"adjective" },
+  "optimista":  { meaning:"optimistic", type:"adjective" },
+  // C1 — formal/academic register
+  "congreso":   { meaning:"congress / conference", type:"noun" },
+  "políticas":  { meaning:"policies", type:"noun" },
+  "empresa":    { meaning:"company", type:"noun" },
+  "programa":   { meaning:"program", type:"noun" },
+  "decisión":   { meaning:"decision", type:"noun" },
+  "economía":   { meaning:"economy", type:"noun" },
+  "familias":   { meaning:"families", type:"noun" },
+  "medidas":    { meaning:"measures", type:"noun" },
+  "datos":      { meaning:"data", type:"noun" },
+  "análisis":   { meaning:"analysis", type:"noun" },
+  "enfoque":    { meaning:"approach", type:"noun" },
+  "cuestión":   { meaning:"issue / matter", type:"noun" },
+  "estrategia": { meaning:"strategy", type:"noun" },
+  "acuerdos":   { meaning:"agreements", type:"noun" },
+  "cultura":    { meaning:"culture", type:"noun" },
+  "controvertida":{ meaning:"controversial", type:"adjective" },
+  "lamentable": { meaning:"regrettable", type:"adjective" },
+  "innegable":  { meaning:"undeniable", type:"adjective" },
+  "cuestionable":{ meaning:"questionable", type:"adjective" },
+  "definitiva": { meaning:"definitive", type:"adjective" },
+  "relevante":  { meaning:"relevant", type:"adjective" },
+  "integral":   { meaning:"comprehensive", type:"adjective" },
+  "moral":      { meaning:"moral", type:"adjective" },
+  "gratuito":   { meaning:"free", type:"adjective" },
+  "profundo":   { meaning:"deep / profound", type:"adjective" },
+};
+
+// Verb conjugation tables (present tense)
+const VERBS = {
+  "ser": {
+    meaning: "to be (permanent)",
+    type: "verb",
+    conjugations: {
+      "yo":"soy", "tú":"eres", "él/ella":"es",
+      "nosotros":"somos", "ellos/ellas":"son", "usted":"es"
+    },
+    note: "Used for identity, origin, profession, permanent traits"
+  },
+  "estar": {
+    meaning: "to be (temporary / state)",
+    type: "verb",
+    conjugations: {
+      "yo":"estoy", "tú":"estás", "él/ella":"está",
+      "nosotros":"estamos", "ellos/ellas":"están", "usted":"está"
+    },
+    note: "Used for location, temporary states, emotions"
+  },
+  "tener": {
+    meaning: "to have",
+    type: "verb",
+    conjugations: {
+      "yo":"tengo", "tú":"tienes", "él/ella":"tiene",
+      "nosotros":"tenemos", "ellos/ellas":"tienen", "usted":"tiene"
+    },
+    note: "Possession, age, expressions (tener hambre = to be hungry)"
+  },
+  "ir": {
+    meaning: "to go",
+    type: "verb",
+    conjugations: {
+      "yo":"voy", "tú":"vas", "él/ella":"va",
+      "nosotros":"vamos", "ellos/ellas":"van", "usted":"va"
+    },
+    note: "Movement, also used as future tense auxiliary (ir a + infinitive)"
+  },
+  "hacer": {
+    meaning: "to do / to make",
+    type: "verb",
+    conjugations: {
+      "yo":"hago", "tú":"haces", "él/ella":"hace",
+      "nosotros":"hacemos", "ellos/ellas":"hacen", "usted":"hace"
+    },
+    note: "Very versatile — hago la tarea, hace lluvia, etc."
+  },
+  "querer": {
+    meaning: "to want",
+    type: "verb",
+    conjugations: {
+      "yo":"quiero", "tú":"quieres", "él/ella":"quiere",
+      "nosotros":"queremos", "ellos/ellas":"quieren", "usted":"quiere"
+    },
+    note: "Desires, wishes — ¿Qué quieres hacer?"
+  },
+  "poder": {
+    meaning: "to be able to / can",
+    type: "verb",
+    conjugations: {
+      "yo":"puedo", "tú":"puedes", "él/ella":"puede",
+      "nosotros":"podemos", "ellos/ellas":"pueden", "usted":"puede"
+    },
+    note: "Ability and permission"
+  },
+  "decir": {
+    meaning: "to say / to tell",
+    type: "verb",
+    conjugations: {
+      "yo":"digo", "tú":"dices", "él/ella":"dice",
+      "nosotros":"decimos", "ellos/ellas":"dicen", "usted":"dice"
+    },
+    note: "Communication — ¿Qué dice él?"
+  },
+  "saber": {
+    meaning: "to know (facts)",
+    type: "verb",
+    conjugations: {
+      "yo":"sé", "tú":"sabes", "él/ella":"sabe",
+      "nosotros":"sabemos", "ellos/ellas":"saben", "usted":"sabe"
+    },
+    note: "Knowledge of facts — Yo sé la respuesta"
+  },
+  "ver": {
+    meaning: "to see",
+    type: "verb",
+    conjugations: {
+      "yo":"veo", "tú":"ves", "él/ella":"ve",
+      "nosotros":"vemos", "ellos/ellas":"ven", "usted":"ve"
+    },
+    note: "Sight and perception"
+  },
+  "creer": {
+    meaning: "to believe / to think",
+    type: "verb",
+    conjugations: {
+      "yo":"creo", "tú":"crees", "él/ella":"cree",
+      "nosotros":"creemos", "ellos/ellas":"creen", "usted":"cree"
+    },
+    note: "Beliefs and opinions — Yo creo que..."
+  },
+  "dar": {
+    meaning: "to give",
+    type: "verb",
+    conjugations: {
+      "yo":"doy", "tú":"das", "él/ella":"da",
+      "nosotros":"damos", "ellos/ellas":"dan", "usted":"da"
+    },
+    note: "Giving — Le da un libro"
+  },
+  "hablar": {
+    meaning: "to speak / to talk",
+    type: "verb",
+    conjugations: {
+      "yo":"hablo", "tú":"hablas", "él/ella":"habla",
+      "nosotros":"hablamos", "ellos/ellas":"hablan", "usted":"habla"
+    },
+    note: "Regular -ar verb. Model conjugation pattern."
+  },
+  "comer": {
+    meaning: "to eat",
+    type: "verb",
+    conjugations: {
+      "yo":"como", "tú":"comes", "él/ella":"come",
+      "nosotros":"comemos", "ellos/ellas":"comen", "usted":"come"
+    },
+    note: "Regular -er verb. Model conjugation pattern."
+  },
+  "vivir": {
+    meaning: "to live",
+    type: "verb",
+    conjugations: {
+      "yo":"vivo", "tú":"vives", "él/ella":"vive",
+      "nosotros":"vivimos", "ellos/ellas":"viven", "usted":"vive"
+    },
+    note: "Regular -ir verb. Model conjugation pattern."
+  },
+  "estudiar": {
+    meaning: "to study",
+    type: "verb",
+    conjugations: {
+      "yo":"estudio", "tú":"estudias", "él/ella":"estudia",
+      "nosotros":"estudiamos", "ellos/ellas":"estudian", "usted":"estudia"
+    },
+    note: "Regular -ar verb with -i- stem"
+  },
+  "trabajar": {
+    meaning: "to work",
+    type: "verb",
+    conjugations: {
+      "yo":"trabajo", "tú":"trabajas", "él/ella":"trabaja",
+      "nosotros":"trabajamos", "ellos/ellas":"trabajan", "usted":"trabaja"
+    },
+    note: "Regular -ar verb"
+  },
+  "necesitar": {
+    meaning: "to need",
+    type: "verb",
+    conjugations: {
+      "yo":"necesito", "tú":"necesitas", "él/ella":"necesita",
+      "nosotros":"necesitamos", "ellos/ellas":"necesitan", "usted":"necesita"
+    },
+    note: "Regular -ar verb — Necesito agua"
+  },
+  "pensar": {
+    meaning: "to think",
+    type: "verb",
+    conjugations: {
+      "yo":"pienso", "tú":"piensas", "él/ella":"piensa",
+      "nosotros":"pensamos", "ellos/ellas":"piensan", "usted":"piensa"
+    },
+    note: "Stem-changing verb (e→ie)"
+  },
+  "buscar": {
+    meaning: "to look for",
+    type: "verb",
+    conjugations: {
+      "yo":"busco", "tú":"buscas", "él/ella":"busca",
+      "nosotros":"buscamos", "ellos/ellas":"buscan", "usted":"busca"
+    },
+    note: "Regular -ar verb"
+  },
+  "esperar": {
+    meaning: "to wait / to hope",
+    type: "verb",
+    conjugations: {
+      "yo":"espero", "tú":"esperas", "él/ella":"espera",
+      "nosotros":"esperamos", "ellos/ellas":"esperan", "usted":"espera"
+    },
+    note: "Regular -ar verb — Espero que sí"
+  },
+// ═══ NEW VERBS with multi-tense conjugations ═══
+// Each verb has: present, preterite, imperfect (+ optional future, conditional, subjunctive)
+  "dormir": {
+    meaning: "to sleep",
+    type: "verb",
+    conjugations: { "yo":"duermo","tú":"duermes","él/ella":"duerme","nosotros":"dormimos","ellos/ellas":"duermen","usted":"duerme" },
+    preterite: { "yo":"dormí","tú":"dormiste","él/ella":"durmió","nosotros":"dormimos","ellos/ellas":"durmieron" },
+    imperfect: { "yo":"dormía","tú":"dormías","él/ella":"dormía","nosotros":"dormíamos","ellos/ellas":"dormían" },
+    note: "Stem-changing (o→ue). Used for narrating past sleep/rest actions."
+  },
+  "escribir": {
+    meaning: "to write",
+    type: "verb",
+    conjugations: { "yo":"escribo","tú":"escribes","él/ella":"escribe","nosotros":"escribimos","ellos/ellas":"escriben","usted":"escribe" },
+    preterite: { "yo":"escribí","tú":"escribiste","él/ella":"escribió","nosotros":"escribimos","ellos/ellas":"escribieron" },
+    imperfect: { "yo":"escribía","tú":"escribías","él/ella":"escribía","nosotros":"escribíamos","ellos/ellas":"escribían" },
+    note: "Regular -ir verb. Essential for writing/communication topics."
+  },
+  "llamar": {
+    meaning: "to call / to name",
+    type: "verb",
+    conjugations: { "yo":"llamo","tú":"llamas","él/ella":"llama","nosotros":"llamamos","ellos/ellas":"llaman","usted":"llama" },
+    preterite: { "yo":"llamé","tú":"llamaste","él/ella":"llamó","nosotros":"llamamos","ellos/ellas":"llamaron" },
+    imperfect: { "yo":"llamaba","tú":"llamabas","él/ella":"llamaba","nosotros":"llamábamos","ellos/ellas":"llamaban" },
+    note: "Regular -ar. Reflexive form: llamarse = to be called/named."
+  },
+  "llegar": {
+    meaning: "to arrive",
+    type: "verb",
+    conjugations: { "yo":"llego","tú":"llegas","él/ella":"llega","nosotros":"llegamos","ellos/ellas":"llegan","usted":"llega" },
+    preterite: { "yo":"llegué","tú":"llegaste","él/ella":"llegó","nosotros":"llegamos","ellos/ellas":"llegaron" },
+    imperfect: { "yo":"llegaba","tú":"llegabas","él/ella":"llegaba","nosotros":"llegábamos","ellos/ellas":"llegaban" },
+    note: "Orthographic change in preterite: llegué (g→gu before e). Key narrative verb."
+  },
+  "salir": {
+    meaning: "to leave / to go out",
+    type: "verb",
+    conjugations: { "yo":"salgo","tú":"sales","él/ella":"sale","nosotros":"salimos","ellos/ellas":"salen","usted":"sale" },
+    preterite: { "yo":"salí","tú":"saliste","él/ella":"salió","nosotros":"salimos","ellos/ellas":"salieron" },
+    imperfect: { "yo":"salía","tú":"salías","él/ella":"salía","nosotros":"salíamos","ellos/ellas":"salían" },
+    note: "Irregular present (salgo). Critical for past narration of events."
+  },
+  "volver": {
+    meaning: "to return / to come back",
+    type: "verb",
+    conjugations: { "yo":"vuelvo","tú":"vuelves","él/ella":"vuelve","nosotros":"volvemos","ellos/ellas":"vuelven","usted":"vuelve" },
+    preterite: { "yo":"volví","tú":"volviste","él/ella":"volvió","nosotros":"volvimos","ellos/ellas":"volvieron" },
+    imperfect: { "yo":"volvía","tú":"volvías","él/ella":"volvía","nosotros":"volvíamos","ellos/ellas":"volvían" },
+    note: "Stem-changing (o→ue). Also: volver a + infinitive = to do again."
+  },
+  "conocer": {
+    meaning: "to know (people/places)",
+    type: "verb",
+    conjugations: { "yo":"conozco","tú":"conoces","él/ella":"conoce","nosotros":"conocemos","ellos/ellas":"conocen","usted":"conoce" },
+    preterite: { "yo":"conocí","tú":"conociste","él/ella":"conoció","nosotros":"conocimos","ellos/ellas":"conocieron" },
+    imperfect: { "yo":"conocía","tú":"conocías","él/ella":"conocía","nosotros":"conocíamos","ellos/ellas":"conocían" },
+    note: "conocía = already knew; conocí = met for the first time. Key B1 contrast with saber."
+  },
+  "encontrar": {
+    meaning: "to find",
+    type: "verb",
+    conjugations: { "yo":"encuentro","tú":"encuentras","él/ella":"encuentra","nosotros":"encontramos","ellos/ellas":"encuentran","usted":"encuentra" },
+    preterite: { "yo":"encontré","tú":"encontraste","él/ella":"encontró","nosotros":"encontramos","ellos/ellas":"encontraron" },
+    imperfect: { "yo":"encontraba","tú":"encontrabas","él/ella":"encontraba","nosotros":"encontrábamos","ellos/ellas":"encontraban" },
+    note: "Stem-changing (o→ue). Also reflexive: encontrarse = to be located."
+  },
+  "comprar": {
+    meaning: "to buy",
+    type: "verb",
+    conjugations: { "yo":"compro","tú":"compras","él/ella":"compra","nosotros":"compramos","ellos/ellas":"compran","usted":"compra" },
+    preterite: { "yo":"compré","tú":"compraste","él/ella":"compró","nosotros":"compramos","ellos/ellas":"compraron" },
+    imperfect: { "yo":"compraba","tú":"comprabas","él/ella":"compraba","nosotros":"comprábamos","ellos/ellas":"compraban" },
+    note: "Regular -ar. Essential for shopping and commerce topics."
+  },
+  "perder": {
+    meaning: "to lose",
+    type: "verb",
+    conjugations: { "yo":"pierdo","tú":"pierdes","él/ella":"pierde","nosotros":"perdemos","ellos/ellas":"pierden","usted":"pierde" },
+    preterite: { "yo":"perdí","tú":"perdiste","él/ella":"perdió","nosotros":"perdimos","ellos/ellas":"perdieron" },
+    imperfect: { "yo":"perdía","tú":"perdías","él/ella":"perdía","nosotros":"perdíamos","ellos/ellas":"perdían" },
+    note: "Stem-changing (e→ie). Irregular participle: perdido."
+  },
+  "entender": {
+    meaning: "to understand",
+    type: "verb",
+    conjugations: { "yo":"entiendo","tú":"entiendes","él/ella":"entiende","nosotros":"entendemos","ellos/ellas":"entienden","usted":"entiende" },
+    preterite: { "yo":"entendí","tú":"entendiste","él/ella":"entendió","nosotros":"entendimos","ellos/ellas":"entendieron" },
+    imperfect: { "yo":"entendía","tú":"entendías","él/ella":"entendía","nosotros":"entendíamos","ellos/ellas":"entendían" },
+    note: "Stem-changing (e→ie). Critical verb for comprehension at all levels."
+  },
+  "parecer": {
+    meaning: "to seem / to appear",
+    type: "verb",
+    conjugations: { "yo":"parezco","tú":"parecer","él/ella":"parece","nosotros":"parecemos","ellos/ellas":"parecen","usted":"parece" },
+    preterite: { "yo":"parecí","tú":"pareciste","él/ella":"pareció","nosotros":"parecimos","ellos/ellas":"parecieron" },
+    imperfect: { "yo":"parecía","tú":"parecías","él/ella":"parecía","nosotros":"parecíamos","ellos/ellas":"parecían" },
+    note: "Irregular present (parezco). Also: parecer + adjective = to seem."
+  },
+  "recordar": {
+    meaning: "to remember",
+    type: "verb",
+    conjugations: { "yo":"recuerdo","tú":"recuerdas","él/ella":"recuerda","nosotros":"recordamos","ellos/ellas":"recuerdan","usted":"recuerda" },
+    preterite: { "yo":"recordé","tú":"recordaste","él/ella":"recordó","nosotros":"recordamos","ellos/ellas":"recordaron" },
+    imperfect: { "yo":"recordaba","tú":"recordabas","él/ella":"recordaba","nosotros":"recordábamos","ellos/ellas":"recordaban" },
+    note: "Stem-changing (o→ue). Also reflexive: recordarse de."
+  },
+  "cambiar": {
+    meaning: "to change",
+    type: "verb",
+    conjugations: { "yo":"cambio","tú":"cambias","él/ella":"cambia","nosotros":"cambiamos","ellos/ellas":"cambian","usted":"cambia" },
+    preterite: { "yo":"cambié","tú":"cambiaste","él/ella":"cambió","nosotros":"cambiamos","ellos/ellas":"cambiaron" },
+    imperfect: { "yo":"cambiaba","tú":"cambiabas","él/ella":"cambiaba","nosotros":"cambiábamos","ellos/ellas":"cambiaban" },
+    note: "Regular -ar. High-frequency verb in B2+ essay topics."
+  },
+  "pasar": {
+    meaning: "to pass / to spend (time)",
+    type: "verb",
+    conjugations: { "yo":"paso","tú":"pasas","él/ella":"pasa","nosotros":"pasamos","ellos/ellas":"pasan","usted":"pasa" },
+    preterite: { "yo":"pasé","tú":"pasaste","él/ella":"pasó","nosotros":"pasamos","ellos/ellas":"pasaron" },
+    imperfect: { "yo":"pasaba","tú":"pasabas","él/ella":"pasaba","nosotros":"pasábamos","ellos/ellas":"pasaban" },
+    note: "Also: ¿qué pasó? = what happened? Very versatile verb."
+  },
+  "llevar": {
+    meaning: "to carry / to wear / to take",
+    type: "verb",
+    conjugations: { "yo":"llevo","tú":"llevas","él/ella":"lleva","nosotros":"llevamos","ellos/ellas":"llevan","usted":"lleva" },
+    preterite: { "yo":"llevé","tú":"llevaste","él/ella":"llevó","nosotros":"llevamos","ellos/ellas":"llevaron" },
+    imperfect: { "yo":"llevaba","tú":"llevabas","él/ella":"llevaba","nosotros":"llevábamos","ellos/ellas":"llevaban" },
+    note: "Also: llevar + time = to have been doing something for..."
+  },
+  "mirar": {
+    meaning: "to look at / to watch",
+    type: "verb",
+    conjugations: { "yo":"miro","tú":"miras","él/ella":"mira","nosotros":"miramos","ellos/ellas":"miran","usted":"mira" },
+    preterite: { "yo":"miré","tú":"miraste","él/ella":"miró","nosotros":"miramos","ellos/ellas":"miraron" },
+    imperfect: { "yo":"miraba","tú":"mirabas","él/ella":"miraba","nosotros":"mirábamos","ellos/ellas":"miraban" },
+    note: "Regular -ar. Also reflexive: mirarse = to look at oneself."
+  }
+};
+
+// Build a reverse lookup: conjugated form → { verb, pronoun }
+const CONJ_LOOKUP = {};
+Object.entries(VERBS).forEach(([inf, vdata]) => {
+  // Index present tense
+  Object.entries(vdata.conjugations).forEach(([pro, form]) => {
+    if (!CONJ_LOOKUP[form]) {
+      CONJ_LOOKUP[form] = { infinitive: inf, pronoun: pro, verbData: vdata, tense: 'present' };
+    }
+  });
+  // Index preterite forms
+  if (vdata.preterite) {
+    Object.entries(vdata.preterite).forEach(([pro, form]) => {
+      if (!CONJ_LOOKUP[form]) {
+        CONJ_LOOKUP[form] = { infinitive: inf, pronoun: pro, verbData: vdata, tense: 'preterite' };
+      }
+    });
+  }
+  // Index imperfect forms
+  if (vdata.imperfect) {
+    Object.entries(vdata.imperfect).forEach(([pro, form]) => {
+      if (!CONJ_LOOKUP[form]) {
+        CONJ_LOOKUP[form] = { infinitive: inf, pronoun: pro, verbData: vdata, tense: 'imperfect' };
+      }
+    });
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// SENTENCES — progressive, ordered by difficulty
+// Each word array entry can be a string (plain word) or
+// { w: "word", new: true } to force annotation on first use
+// ═══════════════════════════════════════════════════════════════
+
+const SENTENCES = [
+  // 1-10: Absolute basics
+  { spanish: "Yo soy un hombre.", english: "I am a man.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella es una mujer.", english: "She is a woman.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros somos amigos.", english: "We are friends.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú eres muy bueno.", english: "You are very good.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo tengo un libro.", english: "I have a book.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Él tiene agua.", english: "He has water.", level:"A1", focus:"Present tense basics" },
+  { spanish: "La casa es grande.", english: "The house is big.", level:"A1", focus:"Present tense basics" },
+  { spanish: "El día es largo.", english: "The day is long.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo voy a la casa.", english: "I go to the house.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú vas a la escuela.", english: "You go to school.", level:"A1", focus:"Present tense basics" },
+  // 11-20
+  { spanish: "Ella va al trabajo.", english: "She goes to work.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros vamos a la ciudad.", english: "We go to the city.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo hablo español.", english: "I speak Spanish.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú hablas muy bien.", english: "You speak very well.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella habla con su amiga.", english: "She speaks with her friend.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo como comida buena.", english: "I eat good food.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Él come algo nuevo.", english: "He eats something new.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros comemos en la casa.", english: "We eat at the house.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo vivo en una ciudad grande.", english: "I live in a big city.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella vive en el pueblo.", english: "She lives in the town.", level:"A1", focus:"Present tense basics" },
+  // 21-30
+  { spanish: "Tú vives cerca de la escuela.", english: "You live close to the school.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo quiero agua.", english: "I want water.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú quieres un libro.", english: "You want a book.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Él quiere ir a la casa.", english: "He wants to go to the house.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros queremos comer.", english: "We want to eat.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo puedo hablar español.", english: "I can speak Spanish.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú puedes ir ahora.", english: "You can go now.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella puede ver el sol.", english: "She can see the sun.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros podemos trabajar.", english: "We can work.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo sé que es bueno.", english: "I know that it is good.", level:"A1", focus:"Present tense basics" },
+  // 31-40
+  { spanish: "Tú sabes la cosa importante.", english: "You know the important thing.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Él sabe cómo hablar bien.", english: "He knows how to speak well.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo creo que es verdad.", english: "I believe it is true.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella cree que el libro es grande.", english: "She thinks the book is big.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros creemos en la vida.", english: "We believe in life.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo digo que es muy importante.", english: "I say that it is very important.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú dices la verdad.", english: "You tell the truth.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Él dice algo nuevo.", english: "He says something new.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo estudio en la escuela.", english: "I study at school.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú estudias cada día.", english: "You study every day.", level:"A1", focus:"Present tense basics" },
+  // 41-50
+  { spanish: "Ella estudia la clase.", english: "She studies the class.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo trabajo en la ciudad.", english: "I work in the city.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú trabajas con tu amigo.", english: "You work with your friend.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros trabajamos mucho.", english: "We work a lot.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo necesito dinero.", english: "I need money.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú necesitas agua ahora.", english: "You need water now.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella necesita un nuevo libro.", english: "She needs a new book.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo pienso que es bueno.", english: "I think it is good.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú piensas en el trabajo.", english: "You think about work.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella piensa que la casa es bonita.", english: "She thinks the house is pretty.", level:"A1", focus:"Present tense basics" },
+  // 51-60
+  { spanish: "Yo busco un lugar nuevo.", english: "I look for a new place.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú buscas la cosa importante.", english: "You look for the important thing.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Él busca agua en la casa.", english: "He looks for water in the house.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo espero que sea bueno.", english: "I hope it is good.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú esperas en la calle.", english: "You wait on the street.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros esperamos la mañana.", english: "We wait for the morning.", level:"A1", focus:"Present tense basics" },
+  { spanish: "El mundo es grande y bonito.", english: "The world is big and pretty.", level:"A1", focus:"Present tense basics" },
+  { spanish: "La vida es muy importante.", english: "Life is very important.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Los niños son muy pequeños.", english: "The children are very small.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Las mujeres hablan con los hombres.", english: "The women speak with the men.", level:"A1", focus:"Present tense basics" },
+  // 61-70
+  { spanish: "Mi padre trabaja mucho cada día.", english: "My father works a lot every day.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Su madre cocina la comida.", english: "His mother cooks the food.", level:"A1", focus:"Present tense basics" },
+  { spanish: "El hermano va a la escuela.", english: "The brother goes to school.", level:"A1", focus:"Present tense basics" },
+  { spanish: "La hermana estudia en la clase.", english: "The sister studies in class.", level:"A1", focus:"Present tense basics" },
+  { spanish: "El hijo tiene un libro nuevo.", english: "The son has a new book.", level:"A1", focus:"Present tense basics" },
+  { spanish: "La hija vive en la ciudad.", english: "The daughter lives in the city.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros tenemos una casa grande.", english: "We have a big house.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ellos viven en el pueblo pequeño.", english: "They live in the small town.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ellas van a trabajar ahora.", english: "They go to work now.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo doy dinero a mi amigo.", english: "I give money to my friend.", level:"A1", focus:"Present tense basics" },
+  // 71-80
+  { spanish: "Tú das agua a la mujer.", english: "You give water to the woman.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Él da un libro a ella.", english: "He gives a book to her.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella ve el cielo y el sol.", english: "She sees the sky and the sun.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo veo la lluvia desde aquí.", english: "I see the rain from here.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros vemos la tierra desde arriba.", english: "We see the earth from above.", level:"A1", focus:"Present tense basics" },
+  { spanish: "El niño quiere jugar en la calle.", english: "The boy wants to play on the street.", level:"A1", focus:"Present tense basics" },
+  { spanish: "La niña cree que el sol es bonito.", english: "The girl thinks the sun is pretty.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Mi amigo dice que necesita dinero.", english: "My friend says he needs money.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Su hermano sabe cómo trabajar bien.", english: "Your brother knows how to work well.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros pensamos que la vida es buena.", english: "We think life is good.", level:"A1", focus:"Present tense basics" },
+  // 81-90
+  { spanish: "Ella busca un lugar para vivir.", english: "She looks for a place to live.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo creo que el mundo es grande.", english: "I believe the world is big.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú quieres estudiar la cosa nueva.", english: "You want to study the new thing.", level:"A1", focus:"Present tense basics" },
+  { spanish: "El hombre tiene mucho dinero.", english: "The man has a lot of money.", level:"A1", focus:"Present tense basics" },
+  { spanish: "La cosa es muy importante para todos.", english: "The thing is very important for everyone.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros necesitamos un lugar nuevo.", english: "We need a new place.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ellos hablan sobre la vida.", english: "They talk about life.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella dice que quiere ir al pueblo.", english: "She says she wants to go to the town.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo espero que el día sea bueno.", english: "I hope the day is good.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Los amigos vamos a comer comida nueva.", english: "The friends go to eat new food.", level:"A1", focus:"Present tense basics" },
+  // 91-100
+  { spanish: "El padre tiene un hijo y una hija.", english: "The father has a son and a daughter.", level:"A1", focus:"Present tense basics" },
+  { spanish: "La madre sabe que los niños son felices.", english: "The mother knows that the children are happy.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Él hace algo importante cada día.", english: "He does something important every day.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Su amiga trabaja en la ciudad grande.", english: "Your friend works in the big city.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo pienso que necesito un libro nuevo.", english: "I think I need a new book.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú sabes que la vida es bonita.", english: "You know that life is pretty.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella puede dar agua a los niños.", english: "She can give water to the children.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros estamos en la casa ahora.", english: "We are in the house now.", level:"A1", focus:"Present tense basics" },
+  { spanish: "El mundo tiene mucha agua y tierra.", english: "The world has a lot of water and earth.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ellos buscan un lugar para trabajar.", english: "They look for a place to work.", level:"A1", focus:"Present tense basics" },
+  // 101-120: more complex
+  { spanish: "La cosa más importante es la vida.", english: "The most important thing is life.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo estoy en la casa de mi padre.", english: "I am at my father's house.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú estás cerca de la escuela grande.", english: "You are close to the big school.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Él está trabajando mucho hoy.", english: "He is working a lot today.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella está en la ciudad con su amiga.", english: "She is in the city with her friend.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros estamos muy felices ahora.", english: "We are very happy now.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ellos están buscando dinero para el trabajo.", english: "They are looking for money for work.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Mi hermano quiere ser un hombre bueno.", english: "My brother wants to be a good man.", level:"A1", focus:"Present tense basics" },
+  { spanish: "La hermana cree que ella puede hablar bien.", english: "The sister believes she can speak well.", level:"A1", focus:"Present tense basics" },
+  { spanish: "El padre dice que los niños son importantes.", english: "The father says the children are important.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo necesito ir a la ciudad para trabajar.", english: "I need to go to the city to work.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú puedes dar dinero a la madre.", english: "You can give money to the mother.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella sabe que el trabajo es importante.", english: "She knows that work is important.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros pensamos que los amigos son buenos.", english: "We think that friends are good.", level:"A1", focus:"Present tense basics" },
+  { spanish: "El mundo es un lugar grande y bonito.", english: "The world is a big and pretty place.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Yo creo que tenemos que estudiar.", english: "I believe we have to study.", level:"A1", focus:"Present tense basics" },
+  { spanish: "La vida en la ciudad es muy diferente.", english: "Life in the city is very different.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Tú dices que quieres vivir en el pueblo.", english: "You say that you want to live in the town.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Ella espera que sus hijos sean felices.", english: "She hopes that her children are happy.", level:"A1", focus:"Present tense basics" },
+  { spanish: "Nosotros vamos a dar comida a los niños.", english: "We are going to give food to the children.", level:"A1", focus:"Present tense basics" },
+  // ═══ A2: Preterite, possessives, imperatives, reflexives, daily life ═══
+  { spanish:"Ayer yo estudié mucho para el examen.", english:"Yesterday I studied a lot for the exam.", level:"A2", focus:"Preterite — completed action" },
+  { spanish:"Ella llegó a la casa por la tarde.", english:"She arrived home in the afternoon.", level:"A2", focus:"Preterite — single past event" },
+  { spanish:"Nosotros comimos una comida muy buena.", english:"We ate a very good meal.", level:"A2", focus:"Preterite — completed action" },
+  { spanish:"Anoche él dijo que estaba muy cansado.", english:"Last night he said he was very tired.", level:"A2", focus:"Preterite + reported speech" },
+  { spanish:"Yo llamé a mi madre esta mañana.", english:"I called my mother this morning.", level:"A2", focus:"Preterite — point in time" },
+  { spanish:"Tú escribiste un mensaje muy largo.", english:"You wrote a very long message.", level:"A2", focus:"Preterite — completed action" },
+  { spanish:"El niño corrió muy rápido por la calle.", english:"The boy ran very fast along the street.", level:"A2", focus:"Preterite — single event" },
+  { spanish:"Ellos llegaron al pueblo hace dos días.", english:"They arrived in the town two days ago.", level:"A2", focus:"Preterite + time expression" },
+  { spanish:"Yo no encontré la cosa que necesitaba.", english:"I didn't find the thing I needed.", level:"A2", focus:"Preterite — negative past" },
+  { spanish:"Ella compró un libro nuevo en la tienda.", english:"She bought a new book at the store.", level:"A2", focus:"Preterite — completed action" },
+  { spanish:"Este libro es mío y ese libro es tuyo.", english:"This book is mine and that book is yours.", level:"A2", focus:"Possessive pronouns" },
+  { spanish:"Mi casa es más grande que la suya.", english:"My house is bigger than yours.", level:"A2", focus:"Possessive + comparative" },
+  { spanish:"Estos son los amigos de mi hermano.", english:"These are my brother's friends.", level:"A2", focus:"Demonstrative + possessive" },
+  { spanish:"¡Escucha bien lo que te digo!", english:"Listen carefully to what I'm saying!", level:"A2", focus:"Informal imperative" },
+  { spanish:"No olvides llevar el libro a la escuela.", english:"Don't forget to bring the book to school.", level:"A2", focus:"Negative imperative" },
+  { spanish:"Coma bien y descanse mucho, por favor.", english:"Eat well and rest a lot, please.", level:"A2", focus:"Formal imperative (usted)" },
+  { spanish:"Primero fui a la tienda y después a la casa.", english:"First I went to the store and then home.", level:"A2", focus:"Time sequence — primero/después" },
+  { spanish:"Hace tres años yo vivía en otra ciudad.", english:"Three years ago I lived in another city.", level:"A2", focus:"Hace + time expression" },
+  { spanish:"El año pasado tuvimos mucho trabajo.", english:"Last year we had a lot of work.", level:"A2", focus:"Past time expression" },
+  { spanish:"La semana pasada ella viajó a Buenos Aires.", english:"Last week she traveled to Buenos Aires.", level:"A2", focus:"Past time expression" },
+  { spanish:"Yo me llamo Carlos y me desperté temprano.", english:"My name is Carlos and I woke up early.", level:"A2", focus:"Reflexive verbs" },
+  { spanish:"Ella se viste muy bien para ir al trabajo.", english:"She dresses very well to go to work.", level:"A2", focus:"Reflexive — vestirse" },
+  { spanish:"Nosotros nos conocimos hace cinco años.", english:"We met each other five years ago.", level:"A2", focus:"Reflexive + preterite" },
+  { spanish:"El niño se cayó en la calle y se lastimó.", english:"The boy fell in the street and got hurt.", level:"A2", focus:"Reflexive verbs in sequence" },
+  { spanish:"La tienda se abre a las nueve de la mañana.", english:"The store opens at nine in the morning.", level:"A2", focus:"Reflexive — abrirse" },
+  { spanish:"Yo necesito comprar leche y pan para la casa.", english:"I need to buy milk and bread for the house.", level:"A2", focus:"Shopping vocabulary" },
+  { spanish:"¿Cuánto cuesta este producto en esta tienda?", english:"How much does this product cost at this store?", level:"A2", focus:"Question about price" },
+  { spanish:"Ella toma el transporte público todos los días.", english:"She takes public transport every day.", level:"A2", focus:"Daily routine" },
+  { spanish:"El coche de mi padre es muy nuevo y grande.", english:"My father's car is very new and big.", level:"A2", focus:"Possessive + description" },
+  { spanish:"Yo duermo muy bien cuando estoy en mi casa.", english:"I sleep very well when I'm at my house.", level:"A2", focus:"Cuando + present" },
+  { spanish:"Nosotros hablamos español, pero no francés.", english:"We speak Spanish, but not French.", level:"A2", focus:"Negation + contrast" },
+  { spanish:"Yo no sé la respuesta a esa pregunta.", english:"I don't know the answer to that question.", level:"A2", focus:"Negation + indirect object" },
+  { spanish:"Tú puedes llamarme si necesitas algo.", english:"You can call me if you need something.", level:"A2", focus:"Si + present + imperative" },
+  { spanish:"Ellos vieron que la puerta estaba abierta.", english:"They saw that the door was open.", level:"A2", focus:"Past + que clause" },
+  { spanish:"La madre le dio comida a los niños.", english:"The mother gave food to the children.", level:"A2", focus:"Indirect object pronoun" },
+  { spanish:"Yo le pregunté a él dónde estaba el libro.", english:"I asked him where the book was.", level:"A2", focus:"Preterite + indirect question" },
+  { spanish:"Nosotros salimos de la casa muy temprano.", english:"We left the house very early.", level:"A2", focus:"Preterite — salir" },
+  { spanish:"Ella volvió al pueblo después de un año.", english:"She returned to the town after a year.", level:"A2", focus:"Preterite — volver" },
+  { spanish:"El hombre abrió la puerta y entró a la casa.", english:"The man opened the door and entered the house.", level:"A2", focus:"Preterite — event sequence" },
+  { spanish:"Tú perdiste el libro que te dio tu madre.", english:"You lost the book your mother gave you.", level:"A2", focus:"Preterite + relative clause" },
+  // ═══ B1: Imperfect, present perfect, future, conditional, basic subjunctive ═══
+  { spanish:"Cuando yo era niño, vivía en un pueblo pequeño.", english:"When I was a child, I lived in a small town.", level:"B1", focus:"Imperfect — habitual past" },
+  { spanish:"Ella siempre comía comida muy buena en casa.", english:"She always ate very good food at home.", level:"B1", focus:"Imperfect — habitual action" },
+  { spanish:"Nosotros estudiábamos juntos todos los días.", english:"We used to study together every day.", level:"B1", focus:"Imperfect — repeated action" },
+  { spanish:"Cuando llegué, él ya estaba en la oficina.", english:"When I arrived, he was already in the office.", level:"B1", focus:"Preterite + imperfect contrast" },
+  { spanish:"Yo estaba leyendo un libro cuando llegó ella.", english:"I was reading a book when she arrived.", level:"B1", focus:"Imperfect progressive + preterite" },
+  { spanish:"El padre trabajaba mucho para dar a sus hijos.", english:"The father used to work hard for his children.", level:"B1", focus:"Imperfect — background info" },
+  { spanish:"Nosotros no sabíamos que él ya había salido.", english:"We didn't know that he had already left.", level:"B1", focus:"Imperfect + pluperfect" },
+  { spanish:"Cada vez que ella llegaba, todos se alegraban.", english:"Every time she arrived, everyone was happy.", level:"B1", focus:"Imperfect — repeated past" },
+  { spanish:"Yo he vivido en esta ciudad durante cinco años.", english:"I have lived in this city for five years.", level:"B1", focus:"Present perfect — duration" },
+  { spanish:"Ella ha escrito tres libros en su vida.", english:"She has written three books in her life.", level:"B1", focus:"Present perfect — life experience" },
+  { spanish:"Nosotros hemos trabajado mucho esta semana.", english:"We have worked a lot this week.", level:"B1", focus:"Present perfect — recent past" },
+  { spanish:"¿Tú has viajado a otros países antes?", english:"Have you traveled to other countries before?", level:"B1", focus:"Present perfect — question" },
+  { spanish:"Él nunca ha visto un libro tan interesante.", english:"He has never seen such an interesting book.", level:"B1", focus:"Present perfect + nunca" },
+  { spanish:"Yo hablaré con el director mañana por la mañana.", english:"I will speak with the director tomorrow morning.", level:"B1", focus:"Simple future tense" },
+  { spanish:"Ella estudiará en la universidad el año que viene.", english:"She will study at university next year.", level:"B1", focus:"Simple future — plans" },
+  { spanish:"Nosotros viviremos en una casa más grande.", english:"We will live in a bigger house.", level:"B1", focus:"Simple future — plans" },
+  { spanish:"Si no llueve mañana, iremos al parque.", english:"If it doesn't rain tomorrow, we'll go to the park.", level:"B1", focus:"1st conditional (si + present + future)" },
+  { spanish:"Cuando llegues a la casa, me llamarás.", english:"When you arrive home, you will call me.", level:"B1", focus:"Cuando + subjunctive + future" },
+  { spanish:"Yo comería más verduras si tuviera tiempo.", english:"I would eat more vegetables if I had time.", level:"B1", focus:"2nd conditional" },
+  { spanish:"Ella viviría en otra ciudad si pudiera.", english:"She would live in another city if she could.", level:"B1", focus:"Conditional — hypothesis" },
+  { spanish:"Nosotros trabajaríamos menos si ganáramos más.", english:"We would work less if we earned more.", level:"B1", focus:"Conditional + imperfect subjunctive" },
+  { spanish:"¿Qué harías si no tuvieras trabajo?", english:"What would you do if you didn't have a job?", level:"B1", focus:"Conditional — question" },
+  { spanish:"Yo espero que ella llegue mañana a tiempo.", english:"I hope she arrives on time tomorrow.", level:"B1", focus:"Espero que + present subjunctive" },
+  { spanish:"Es importante que nosotros estudiemos más.", english:"It is important that we study more.", level:"B1", focus:"Es importante que + subjunctive" },
+  { spanish:"Tú quieres que yo hable con el padre.", english:"You want me to speak with the father.", level:"B1", focus:"Querer que + subjunctive" },
+  { spanish:"Ella necesita que alguien le ayude con esto.", english:"She needs someone to help her with this.", level:"B1", focus:"Necesitar que + subjunctive" },
+  { spanish:"Es posible que llueva esta tarde en la ciudad.", english:"It is possible that it will rain this afternoon.", level:"B1", focus:"Es posible que + subjunctive" },
+  { spanish:"No creo que él sepa la respuesta a esto.", english:"I don't think he knows the answer to this.", level:"B1", focus:"No creo que + subjunctive" },
+  { spanish:"Es mejor que ella descanse más esta noche.", english:"It is better that she rests more tonight.", level:"B1", focus:"Es mejor que + subjunctive" },
+  { spanish:"Ojalá que el día de mañana sea muy bueno.", english:"I hope that tomorrow is a very good day.", level:"B1", focus:"Ojalá que + subjunctive" },
+  { spanish:"Yo lo vi en la calle cuando salí de la casa.", english:"I saw it on the street when I left the house.", level:"B1", focus:"Direct object pronoun — lo" },
+  { spanish:"Ella le dijo a él que necesitaba ayuda.", english:"She told him that she needed help.", level:"B1", focus:"Indirect object pronoun — le" },
+  { spanish:"Nosotros nos conocemos desde hace mucho tiempo.", english:"We have known each other for a long time.", level:"B1", focus:"Reflexive + present perfect" },
+  { spanish:"¿Le puedo dar algo de comer al niño?", english:"Can I give the child something to eat?", level:"B1", focus:"Indirect object + infinitive" },
+  { spanish:"El libro que yo leí fue muy interesante.", english:"The book that I read was very interesting.", level:"B1", focus:"Relative clause — que" },
+  { spanish:"La mujer que habló con nosotros es profesora.", english:"The woman who spoke with us is a teacher.", level:"B1", focus:"Relative clause — que (subject)" },
+  { spanish:"El lugar donde vivió mi padre es muy bonito.", english:"The place where my father lived is very pretty.", level:"B1", focus:"Relative clause — donde" },
+  { spanish:"Nosotros conocemos al hombre del que habló ella.", english:"We know the man she was talking about.", level:"B1", focus:"Relative clause — del que" },
+  { spanish:"Cuando viaje a Colombia, quiero ver Cartagena.", english:"When I travel to Colombia, I want to see Cartagena.", level:"B1", focus:"Cuando + subjunctive (future)" },
+  { spanish:"El doctor me dijo que necesito más descanso.", english:"The doctor told me that I need more rest.", level:"B1", focus:"Reported speech + health" },
+  { spanish:"En mi opinión, la educación es muy importante.", english:"In my opinion, education is very important.", level:"B1", focus:"Expressing opinions" },
+  { spanish:"Yo creo que todos deberían estudiar un idioma.", english:"I think everyone should study a language.", level:"B1", focus:"Opinion + deber (should)" },
+  { spanish:"Es necesario que los jóvenes aprendan historia.", english:"It is necessary that young people learn history.", level:"B1", focus:"Impersonal + subjunctive" },
+  { spanish:"Cuando ella tenía quince años, ya hablaba inglés.", english:"When she was fifteen, she already spoke English.", level:"B1", focus:"Cuando + imperfect (habitual)" },
+  { spanish:"Si yo fuera más joven, estudiaría música.", english:"If I were younger, I would study music.", level:"B1", focus:"2nd conditional — personal wish" },
+  { spanish:"Nosotros hemos aprendido mucho de esta experiencia.", english:"We have learned a lot from this experience.", level:"B1", focus:"Present perfect + reflection" },
+  { spanish:"Tú deberías hablar con ella sobre el problema.", english:"You should talk to her about the problem.", level:"B1", focus:"Deber — giving advice" },
+  { spanish:"Es verdad que la vida en la ciudad es difícil.", english:"It is true that life in the city is difficult.", level:"B1", focus:"Es verdad que + indicative" },
+  // ═══ B2: Pret/imperf contrast, present perfect subj, por/para, passive, gerunds, essays ═══
+  { spanish:"Mientras yo caminaba por la calle, vi a mi amigo.", english:"While I was walking along the street, I saw my friend.", level:"B2", focus:"Imperfect (background) + preterite (event)" },
+  { spanish:"Cuando llegó al aeropuerto, ya había cerrado el vuelo.", english:"When he arrived, the flight had already closed.", level:"B2", focus:"Preterite + pluperfect" },
+  { spanish:"Ella conoció a su esposo cuando trabajaba en Madrid.", english:"She met her husband when she was working in Madrid.", level:"B2", focus:"Preterite (event) + imperfect (context)" },
+  { spanish:"No sabía que habían cambiado el horario del tren.", english:"I didn't know they had changed the train schedule.", level:"B2", focus:"Imperfect + pluperfect" },
+  { spanish:"Cuando éramos estudiantes, no entendíamos la gramática.", english:"When we were students, we didn't understand grammar.", level:"B2", focus:"Imperfect — background + context" },
+  { spanish:"Es posible que el gobierno cambie esta ley pronto.", english:"It is possible the government will change this law soon.", level:"B2", focus:"Es posible que + subjunctive (doubt)" },
+  { spanish:"Me alegra mucho que tu hermano pueda venir.", english:"I'm very happy that your brother can come.", level:"B2", focus:"Alegrarse de que + subjunctive (emotion)" },
+  { spanish:"Es importante que todos los ciudadanos voten.", english:"It is important that all citizens vote.", level:"B2", focus:"Es importante que + subjunctive" },
+  { spanish:"Dudo mucho que él haya terminado el trabajo.", english:"I doubt very much that he has finished the work.", level:"B2", focus:"Dudar que + perfect subjunctive" },
+  { spanish:"Es necesario que se busque una nueva solución.", english:"It is necessary to find a new solution.", level:"B2", focus:"Es necesario que + subjunctive" },
+  { spanish:"Me preocupa que los niños no estén comiendo bien.", english:"I'm worried the children aren't eating well.", level:"B2", focus:"Preocuparse de que + subjunctive" },
+  { spanish:"No es verdad que la tecnología sea siempre mala.", english:"It is not true that technology is always bad.", level:"B2", focus:"No es verdad que + subjunctive" },
+  { spanish:"Es importante que cada persona conozca su historia.", english:"It is important each person knows their history.", level:"B2", focus:"Es importante que + subjunctive" },
+  { spanish:"Yo compré este regalo para mi madre con amor.", english:"I bought this gift for my mother with love.", level:"B2", focus:"Para (purpose/recipient) vs por" },
+  { spanish:"Ella estudió mucho por la noche para pasar el examen.", english:"She studied at night in order to pass the exam.", level:"B2", focus:"Por (time) vs para (goal)" },
+  { spanish:"Es un problema muy difícil para todos los ciudadanos.", english:"It is a very difficult problem for all citizens.", level:"B2", focus:"Para (recipient)" },
+  { spanish:"Nosotros pagamos mucho por la educación de nuestros hijos.", english:"We pay a lot for the education of our children.", level:"B2", focus:"Por (exchange)" },
+  { spanish:"El libro fue escrito por un autor muy importante.", english:"The book was written by a very important author.", level:"B2", focus:"Passive voice — ser + participle + por" },
+  { spanish:"La ley fue aprobada por el gobierno hace dos años.", english:"The law was approved by the government two years ago.", level:"B2", focus:"Passive voice — past event" },
+  { spanish:"Los problemas del medio ambiente son conocidos por todos.", english:"Environment problems are known by everyone.", level:"B2", focus:"Passive voice — present" },
+  { spanish:"Esta decisión fue tomada sin considerar las opiniones.", english:"This decision was made without considering opinions.", level:"B2", focus:"Passive + sin + gerund" },
+  { spanish:"Mientras trabajaba, él escuchaba la música.", english:"While he was working, he listened to music.", level:"B2", focus:"Gerund — mientras + gerund" },
+  { spanish:"Estudiar es la mejor forma de aprender un idioma.", english:"Studying is the best way to learn a language.", level:"B2", focus:"Gerund as subject" },
+  { spanish:"Ella salió corriendo cuando vio la noticia.", english:"She ran out when she saw the news.", level:"B2", focus:"Gerund — manner" },
+  { spanish:"Es difícil vivir sin tener un trabajo seguro.", english:"It is difficult to live without a secure job.", level:"B2", focus:"Sin + gerund" },
+  { spanish:"Es importante que todos hayan leído el documento.", english:"It is important everyone has read the document.", level:"B2", focus:"Present perfect subjunctive" },
+  { spanish:"No creo que ella haya podido terminar a tiempo.", english:"I don't think she could finish on time.", level:"B2", focus:"No creo que + perfect subjunctive" },
+  { spanish:"Es posible que los precios hayan subido mucho.", english:"It is possible prices have gone up a lot.", level:"B2", focus:"Es posible que + perfect subjunctive" },
+  { spanish:"En mi opinión, es necesario cambiar el sistema educativo.", english:"In my opinion, it is necessary to change the education system.", level:"B2", focus:"Essay — opinion statement" },
+  { spanish:"Sin embargo, no es fácil encontrar una solución rápida.", english:"However, it is not easy to find a quick solution.", level:"B2", focus:"Connector — sin embargo" },
+  { spanish:"Además, los jóvenes deben aprender a pensar de forma crítica.", english:"Furthermore, young people should learn to think critically.", level:"B2", focus:"Connector — además" },
+  { spanish:"Por lo tanto, es importante invertir más en educación.", english:"Therefore, it is important to invest more in education.", level:"B2", focus:"Connector — por lo tanto" },
+  { spanish:"A pesar de los problemas, hay razones para ser optimista.", english:"Despite the problems, there are reasons to be optimistic.", level:"B2", focus:"A pesar de — concessive" },
+  { spanish:"Es obvio que la sociedad necesita adaptar sus valores.", english:"It is obvious society needs to adapt its values.", level:"B2", focus:"Es obvio que + indicative" },
+  { spanish:"De hecho, muchos expertos coinciden en esta opinión.", english:"In fact, many experts agree on this opinion.", level:"B2", focus:"De hecho — discourse marker" },
+  { spanish:"No solo es un problema económico, sino también social.", english:"It is not only an economic problem, but also social.", level:"B2", focus:"No solo… sino también" },
+  { spanish:"Aunque la situación es difícil, hay esperanza.", english:"Although the situation is difficult, there is hope.", level:"B2", focus:"Aunque + indicative (concessive)" },
+  { spanish:"En cambio, los países desarrollados tienen más recursos.", english:"On the other hand, developed countries have more resources.", level:"B2", focus:"En cambio — contrast" },
+  { spanish:"Por otro lado, no todos los cambios son positivos.", english:"On the other hand, not all changes are positive.", level:"B2", focus:"Por otro lado — contrast" },
+  { spanish:"Es verdad que la tecnología ha cambiado nuestra vida.", english:"It is true technology has changed our life.", level:"B2", focus:"Es verdad que + indicative" },
+  { spanish:"Sobre todo, es importante que los ciudadanos participen.", english:"Above all, it is important citizens participate.", level:"B2", focus:"Sobre todo — emphasis" },
+  { spanish:"Al menos, podemos decir que hay avances lentes.", english:"At least, we can say there are slow advances.", level:"B2", focus:"Al menos — minimizer" },
+  { spanish:"En general, la situación está mejorando poco a poco.", english:"In general, the situation is improving little by little.", level:"B2", focus:"En general — generalizer" },
+  { spanish:"En realidad, el problema es mucho más complejo.", english:"In reality, the problem is much more complex.", level:"B2", focus:"En realidad — correction" },
+  // ═══ C1: Imperfect subj, 3rd conditional, perifrasis, como si, advanced connectors, formal register ═══
+  { spanish:"Si yo pudiera vivir en cualquier lugar, elegería Buenos Aires.", english:"If I could live anywhere, I would choose Buenos Aires.", level:"C1", focus:"2nd conditional — si + imp. subj. + conditional" },
+  { spanish:"Ella deseaba que sus hijos tuvieran una vida mejor.", english:"She wished her children would have a better life.", level:"C1", focus:"Desear que + imperfect subjunctive" },
+  { spanish:"Sería mejor que todos nosotros habláramos más despacio.", english:"It would be better if we all spoke more slowly.", level:"C1", focus:"Sería mejor que + imperfect subjunctive" },
+  { spanish:"Si hubiera sabido la verdad, no habría dicho nada.", english:"If I had known the truth, I wouldn't have said anything.", level:"C1", focus:"3rd conditional — pluperfect subj. + conditional perfect" },
+  { spanish:"Yo quería que ella fuera conmigo al congreso.", english:"I wanted her to go with me to the congress.", level:"C1", focus:"Quería que + imperfect subjunctive" },
+  { spanish:"Es lamentable que no haya sido posible resolver esto.", english:"It is regrettable it hasn't been possible to resolve this.", level:"C1", focus:"Es lamentable que + perfect subjunctive" },
+  { spanish:"Ojalá hubiera llegado antes para ver el acto completo.", english:"I wish I had arrived earlier to see the whole event.", level:"C1", focus:"Ojalá + pluperfect subjunctive" },
+  { spanish:"Si la economía mejorara, más familias podrían prosperar.", english:"If the economy improved, more families could prosper.", level:"C1", focus:"2nd conditional — economic topic" },
+  { spanish:"Me gustaría que se implementaran políticas más justas.", english:"I would like more just policies to be implemented.", level:"C1", focus:"Me gustaría que + imperfect subjunctive" },
+  { spanish:"Es dudoso que el problema pueda resolverse tan fácilmente.", english:"It is doubtful the problem can be solved so easily.", level:"C1", focus:"Es dudoso que + present subjunctive" },
+  { spanish:"A menos que cambie la situación, no podremos avanzar.", english:"Unless the situation changes, we won't be able to advance.", level:"C1", focus:"A menos que + subjunctive" },
+  { spanish:"Con tal de que todos cooperen, la solución es posible.", english:"Provided everyone cooperates, the solution is possible.", level:"C1", focus:"Con tal de que + subjunctive" },
+  { spanish:"Para que los ciudadanos entiendan, es necesario explicar.", english:"So that citizens understand, it is necessary to explain.", level:"C1", focus:"Para que + subjunctive (purpose)" },
+  { spanish:"Sin que nadie lo sepa, el gobierno tomó esa decisión.", english:"Without anyone knowing, the government made that decision.", level:"C1", focus:"Sin que + subjunctive" },
+  { spanish:"Antes de que lleguen los resultados, debemos prepararnos.", english:"Before the results arrive, we must prepare.", level:"C1", focus:"Antes de que + subjunctive" },
+  { spanish:"En caso de que no llegue, por favor llámame.", english:"In case he doesn't arrive, please call me.", level:"C1", focus:"En caso de que + subjunctive" },
+  { spanish:"No obstante, hay que considerar otros factores importantes.", english:"Nevertheless, other important factors must be considered.", level:"C1", focus:"No obstante — formal connector" },
+  { spanish:"Por consiguiente, la sociedad debe cambiar sus actitudes.", english:"Consequently, society must change its attitudes.", level:"C1", focus:"Por consiguiente — formal connector" },
+  { spanish:"De manera que todos beneficien, la ley debe ser justa.", english:"So that everyone benefits, the law must be fair.", level:"C1", focus:"De manera que + subjunctive" },
+  { spanish:"Él habló como si no supiera nada de lo que había pasado.", english:"He spoke as if he didn't know anything about what had happened.", level:"C1", focus:"Como si + imperfect subjunctive" },
+  { spanish:"Ella actuó como si la situación fuera completamente normal.", english:"She acted as if the situation were completely normal.", level:"C1", focus:"Como si + imperfect subjunctive" },
+  { spanish:"El gobierno está por tomar una decisión muy importante.", english:"The government is about to make a very important decision.", level:"C1", focus:"Estar por + infinitive (perífrasis)" },
+  { spanish:"Nosotros hemos tenido que cambiar nuestros planes varias veces.", english:"We have had to change our plans several times.", level:"C1", focus:"Haber tenido que + infinitive" },
+  { spanish:"Se va a necesitar mucho tiempo para resolver este problema.", english:"A lot of time is going to be needed to solve this problem.", level:"C1", focus:"Ir a + infinitive — formal register" },
+  { spanish:"La empresa ha puesto en marcha un nuevo programa social.", english:"The company has launched a new social program.", level:"C1", focus:"Poner en marcha — perífrasis idiomatic" },
+  { spanish:"El presidente, cuya decisión fue muy controvertida, habló ayer.", english:"The president, whose controversial decision, spoke yesterday.", level:"C1", focus:"Cuyo — possessive relative pronoun" },
+  { spanish:"El gobierno aprobó una nueva ley, lo cual fue muy importante.", english:"The government approved a new law, which was very important.", level:"C1", focus:"Lo cual — non-restrictive relative" },
+  { spanish:"Es un tema sobre el cual hay mucho debate en la sociedad.", english:"It is a topic about which there is much debate in society.", level:"C1", focus:"Sobre el cual — formal relative" },
+  { spanish:"La situación en la que nos encontramos es muy difícil.", english:"The situation in which we find ourselves is very difficult.", level:"C1", focus:"En la que — relative clause" },
+  { spanish:"Se debe tener en cuenta que los datos pueden ser inexactos.", english:"It should be noted that the data may be inaccurate.", level:"C1", focus:"Se debe — impersonal passive" },
+  { spanish:"Han sido identificados varios factores que contribuyen al problema.", english:"Several factors contributing to the problem have been identified.", level:"C1", focus:"Passive voice — present perfect" },
+  { spanish:"La cultura latinoamericana ha sido influenciada por muchos factores.", english:"Latin American culture has been influenced by many factors.", level:"C1", focus:"Passive voice — cultural topic" },
+  { spanish:"Para el año que viene, habremos completado el proyecto.", english:"By next year, we will have completed the project.", level:"C1", focus:"Future perfect — futuro perfecto" },
+  { spanish:"Si hubiera tenido más tiempo, habría escrito un libro mejor.", english:"If I had had more time, I would have written a better book.", level:"C1", focus:"3rd conditional — pluperfect subj. + conditional perfect" },
+  { spanish:"Ellos habrían podido ayudarnos si nos hubieran llamado.", english:"They could have helped us if they had called us.", level:"C1", focus:"3rd conditional — reverse order" },
+  { spanish:"Es innegable que el medio ambiente requiere una atención urgente.", english:"It is undeniable the environment requires urgent attention.", level:"C1", focus:"Es innegable que — C1 essay opener" },
+  { spanish:"En el supuesto de que se apliquen estas medidas, podrían funcionar.", english:"In the event these measures are applied, they could work.", level:"C1", focus:"En el supuesto de que + subjunctive" },
+  { spanish:"Si bien la intención es buena, la ejecución es complicada.", english:"Although the intention is good, the execution is complicated.", level:"C1", focus:"Si bien — formal concessive" },
+  { spanish:"Lejos de ser un problema simple, requiere un enfoque integral.", english:"Far from being a simple problem, it requires a comprehensive approach.", level:"C1", focus:"Lejos de ser — formal concessive" },
+  { spanish:"No solo se trata de una cuestión económica, sino de una moral.", english:"It is not only an economic issue, but a moral one.", level:"C1", focus:"No solo… sino — formal contrast" },
+  { spanish:"A fin de encontrar una solución, es necesario dialogar.", english:"In order to find a solution, it is necessary to have dialogue.", level:"C1", focus:"A fin de — formal purpose" },
+  { spanish:"Con vistas a mejorar la situación, se proponen nuevas medidas.", english:"With a view to improving the situation, new measures are proposed.", level:"C1", focus:"Con vistas a — formal purpose" },
+  { spanish:"En virtud de los acuerdos firmados, ambos países cooperarán.", english:"By virtue of the signed agreements, both countries will cooperate.", level:"C1", focus:"En virtud de — formal reason" },
+  { spanish:"Por mucho que se intente, el problema no se resuelve solo.", english:"No matter how hard one tries, the problem doesn't resolve itself.", level:"C1", focus:"Por mucho que + subjunctive" },
+  { spanish:"Quizás sea necesario reconsiderar la estrategia actual del país.", english:"Perhaps it is necessary to reconsider the country's current strategy.", level:"C1", focus:"Quizás + subjunctive — uncertainty" },
+  { spanish:"Tal vez hayamos subestimado la complejidad de esta situación.", english:"Perhaps we have underestimated the complexity of this situation.", level:"C1", focus:"Tal vez + perfect subjunctive" },
+  { spanish:"En cuanto se conozcan los datos, tomaremos una decisión.", english:"As soon as the data is known, we will make a decision.", level:"C1", focus:"En cuanto + subjunctive — temporal" },
+  { spanish:"Sin duda alguna, este es uno de los temas más relevantes.", english:"Without a doubt, this is one of the most relevant topics.", level:"C1", focus:"Sin duda alguna — formal emphasis" },
+  { spanish:"De forma que todos puedan beneficiarse, debe ser gratuito.", english:"So that everyone can benefit, it must be free.", level:"C1", focus:"De forma que + subjunctive" },
+  { spanish:"La mayor parte de los expertos coinciden en que es necesario actuar.", english:"The majority of experts agree it is necessary to act.", level:"C1", focus:"La mayor parte de — formal subject" },
+  { spanish:"Dado que la situación es compleja, se requiere un análisis profundo.", english:"Given that the situation is complex, a deep analysis is required.", level:"C1", focus:"Dado que — formal causal connector" },
+  { spanish:"Hasta donde yo sé, no se ha encontrado ninguna solución definitiva.", english:"As far as I know, no definitive solution has been found.", level:"C1", focus:"Hasta donde — epistemic hedge" },
+  { spanish:"Es cuestionable si estas medidas producerán los resultados esperados.", english:"It is questionable whether these measures will produce expected results.", level:"C1", focus:"Es cuestionable si — formal doubt" },
+  { spanish:"En tanto que los recursos sean limitados, se necesitan alternativas creativas.", english:"Insofar as resources are limited, creative alternatives are needed.", level:"C1", focus:"En tanto que + subjunctive — conditional" },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// APP STATE & LOGIC
+// ═══════════════════════════════════════════════════════════════
+
+const SENTENCES_PER_PAGE = 15;
+let currentPage = 1;
+let totalPages = 1;
+let activeLevel = 'ALL';   // current level filter
+let readSet = new Set();       // indices of read sentences
+let seenWords = new Set();     // words already annotated (first occurrence done)
+let srsCards = [];             // { id, front, back, type, interval, dueDate, lastReview, ease, example }
+let srsIdCounter = 0;
+let currentSrsIndex = -1;
+let preferredVoice = '';
+
+// Load state from localStorage
+function loadState() {
+  try {
+    const s = localStorage.getItem('ci-spanish-state');
+    if (s) {
+      const d = JSON.parse(s);
+      readSet = new Set(d.readSet || []);
+      seenWords = new Set(d.seenWords || []);
+      srsCards = d.srsCards || [];
+      srsIdCounter = d.srsIdCounter || 0;
+      preferredVoice = d.preferredVoice || '';
+    }
+  } catch(e) {}
+}
+function saveState() {
+  try {
+    localStorage.setItem('ci-spanish-state', JSON.stringify({
+      readSet: [...readSet],
+      seenWords: [...seenWords],
+      srsCards,
+      srsIdCounter,
+      preferredVoice
+    }));
+  } catch(e) {}
+}
+
+// ─── Tokenize a Spanish sentence into words ───
+function tokenize(text) {
+  // Split keeping punctuation attached or separate
+  return text.match(/[¿¡]|[A-ZÀ-ÿa-zà-ÿ]+[.,!?;:]*|[.,!?;:]/g) || [];
+}
+
+function stripPunctuation(w) {
+  return w.replace(/[^A-Za-zÀ-ÿ]/g, '');
+}
+
+// ─── Check if a word is "known" (in VOCAB or VERBS conjugation) ───
+function lookupWord(raw) {
+  const w = stripPunctuation(raw).toLowerCase();
+  if (!w) return null;
+
+  // Check direct vocab
+  if (VOCAB[w]) return { word: w, data: VOCAB[w], isVerb: false };
+
+  // Check verb conjugation lookup
+  if (CONJ_LOOKUP[w]) {
+    const cl = CONJ_LOOKUP[w];
+    return { word: w, data: cl.verbData, isVerb: true, infinitive: cl.infinitive, pronoun: cl.pronoun };
+  }
+
+  return null;
+}
+
+// ─── Add word to SRS if not already there ───
+function addToSRS(wordInfo, sentenceText) {
+  const id = wordInfo.word;
+  // Check if already in SRS
+  if (srsCards.find(c => c.id === id)) return;
+
+  const card = {
+    id,
+    type: wordInfo.isVerb ? 'conjugation' : 'vocabulary',
+    front: wordInfo.isVerb ? wordInfo.word + ' (form of ' + wordInfo.infinitive + ')' : wordInfo.word,
+    back: wordInfo.isVerb ? wordInfo.data.meaning : wordInfo.data.meaning,
+    infinitive: wordInfo.isVerb ? wordInfo.infinitive : null,
+    pronoun: wordInfo.isVerb ? wordInfo.pronoun : null,
+    example: sentenceText,
+    interval: 0,     // 0 = new, 1 = 1 day, 3 = 3 days, etc.
+    dueDate: Date.now(),
+    ease: 0
+  };
+  srsCards.push(card);
+  srsIdCounter++;
+  saveState();
+}
+
+// ─── Render a single sentence card ───
+function renderSentenceCard(sentence, index) {
+  const tokens = tokenize(sentence.spanish);
+  let wordsHtml = '';
+  const newWordsInCard = [];
+
+  tokens.forEach(token => {
+    const raw = token;
+    const clean = stripPunctuation(token);
+    const punct = token.slice(clean.length); // trailing punctuation
+    const wLower = clean.toLowerCase();
+
+    if (!clean) {
+      wordsHtml += raw;
+      return;
+    }
+
+    const info = lookupWord(raw);
+    const isNew = info && !seenWords.has(wLower);
+
+    if (isNew) {
+      newWordsInCard.push({ info, raw: clean });
+    }
+
+    if (info && isNew) {
+      // First occurrence: show annotation trigger
+      let annBox = '';
+      let conjDetail = '';
+
+      if (info.isVerb) {
+        // Verb conjugation annotation
+        const vd = VERBS[info.infinitive];
+        annBox = `<div class="ann-box">
+          <span class="ann-meaning">${vd.meaning}</span>
+          <span class="ann-type verb-tag">verb — ${info.infinitive}</span>
+        </div>`;
+
+        // Multi-tense conjugation grid with tabs
+        const tenses = [
+          { key: 'conjugations', label: 'Present' },
+          { key: 'preterite',    label: 'Preterite' },
+          { key: 'imperfect',    label: 'Imperfect' }
+        ];
+        let tabsHtml = '';
+        let panelsHtml = '';
+        let first = true;
+        tenses.forEach(({ key, label }) => {
+          if (!vd[key]) return;
+          tabsHtml += `<button class="tense-tab ${first?'active':''}" onclick="event.stopPropagation();this.parentNode.querySelectorAll('.tense-tab').forEach(b=>b.classList.remove('active'));this.classList.add('active');this.closest('.conj-detail').querySelectorAll('.conj-tense-panel').forEach(p=>p.classList.remove('active'));this.closest('.conj-detail').querySelector('.conj-tense-panel[data-tense=${key}]').classList.add('active')">${label}</button>`;
+          let gridHtml = '';
+          Object.entries(vd[key]).forEach(([pro, form]) => {
+            const hl = (form === wLower) ? ' highlight' : '';
+            gridHtml += `<div class="conj-row"><span class="conj-pronoun">${pro}</span><span class="conj-form${hl}">${form}</span></div>`;
+          });
+          panelsHtml += `<div class="conj-tense-panel ${first?'active':''}" data-tense="${key}"><div class="conj-grid">${gridHtml}</div></div>`;
+          first = false;
+        });
+        conjDetail = `<div class="conj-detail">
+          <div class="conj-title">${info.infinitive}</div>
+          <div class="tense-tabs">${tabsHtml}</div>
+          ${panelsHtml}
+        </div>`;
+      } else {
+        // Regular vocab annotation
+        annBox = `<div class="ann-box">
+          <span class="ann-meaning">${info.data.meaning}</span>
+          <span class="ann-type">${info.data.type}</span>
+        </div>`;
+      }
+
+      const cssClass = info.isVerb ? 'verb-new' : 'word-new';
+      wordsHtml += `<div class="annotation" onclick="this.classList.toggle('open')">
+        <span class="ann-trigger word ${cssClass}">${clean}</span>${punct}${annBox}${conjDetail}
+      </div> `;
+    } else {
+      wordsHtml += `<span class="word">${clean}</span>${punct} `;
+    }
+  });
+
+  const isRead = readSet.has(index);
+  const badge = sentence.level ? `<span class="level-badge ${sentence.level}">${sentence.level}</span>` : '';
+  const focusTag = sentence.focus ? `<span class="focus-tag">📌 ${sentence.focus}</span>` : '';
+  return `<div class="sentence-card ${isRead ? 'read' : ''}" data-index="${index}">
+    <span class="card-num">#${index + 1} ${badge}</span>
+    <div class="sentence-row">
+      <button class="play-btn" onclick="playSentence('${sentence.spanish.replace(/'/g,"\\'")}', this)" title="Listen">
+        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+      </button>
+      <div class="sentence-text">${wordsHtml.trim()}</div>
+    </div>
+    <div class="card-bottom">
+      <button class="reveal-btn" onclick="toggleTranslation(this)">Show translation</button>
+      <div class="translation hidden">${sentence.english}</div>
+      ${focusTag}
+      <button class="mark-read" onclick="markRead(${index}, this)">
+        ${isRead ? '✓ Read' : 'Mark Read'}
+      </button>
+    </div>
+  </div>`;
+}
+
+// ─── Render current page ───
+function getFilteredSentences() {
+  if (activeLevel === 'ALL') return SENTENCES.map((s,i) => ({s, i}));
+  return SENTENCES.map((s,i) => ({s,i})).filter(({s}) => s.level === activeLevel);
+}
+
+function setLevel(lvl) {
+  activeLevel = lvl;
+  currentPage = 1;
+  document.querySelectorAll('.level-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.level === lvl);
+  });
+  renderPage();
+}
+
+function renderPage() {
+  const filtered = getFilteredSentences();
+  totalPages = Math.ceil(filtered.length / SENTENCES_PER_PAGE);
+  if (currentPage > totalPages) currentPage = totalPages;
+  if (currentPage < 1) currentPage = 1;
+
+  const start = (currentPage - 1) * SENTENCES_PER_PAGE;
+  const end = Math.min(start + SENTENCES_PER_PAGE, filtered.length);
+
+  let html = '';
+  for (let i = start; i < end; i++) {
+    const { s, i: origIdx } = filtered[i];
+    html += renderSentenceCard(s, origIdx);
+
+    // Mark words as seen logic removed from here and moved to markRead
+    // so that words stay highlighted until the sentence is actually read.
+  }
+
+  document.getElementById('sentences-container').innerHTML = html;
+  document.getElementById('page-input').value = currentPage;
+  document.getElementById('page-total').textContent = '/ ' + totalPages;
+
+  // Progress bar — show progress within current filter
+  const filterCount = filtered.length;
+  const readInFilter = filtered.filter(({i}) => readSet.has(i)).length;
+  const pct = filterCount ? (readInFilter / filterCount) * 100 : 0;
+  document.getElementById('progress-bar').style.width = pct + '%';
+
+  saveState();
+}
+
+// ─── TTS via Web Speech API ───
+let currentUtterance = null;
+function playSentence(text, btn) {
+  if (!('speechSynthesis' in window)) {
+    showToast('Speech synthesis not supported in this browser.');
+    return;
+  }
+
+  // If already playing this, stop
+  if (currentUtterance && btn.classList.contains('playing')) {
+    window.speechSynthesis.cancel();
+    btn.classList.remove('playing');
+    currentUtterance = null;
+    return;
+  }
+
+  // Cancel any other
+  window.speechSynthesis.cancel();
+  document.querySelectorAll('.play-btn.playing').forEach(b => b.classList.remove('playing'));
+
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'es-ES';
+  utt.rate = 0.85;
+  utt.pitch = 1.0;
+
+  // Select voice from dropdown or auto-detect
+  const voices = window.speechSynthesis.getVoices();
+  const selectedName = document.getElementById('voice-select').value;
+  let spanishVoice = voices.find(v => v.name === selectedName);
+
+  if (!spanishVoice) {
+    // Auto-detect high quality voice
+    const preferred = ['Google español', 'Google Español', 'Monica', 'Paulina', 'Jorge', 'Microsoft Helena', 'Microsoft Laura', 'Microsoft Sabina'];
+    for (const name of preferred) {
+      spanishVoice = voices.find(v => v.name.includes(name) && v.lang.startsWith('es'));
+      if (spanishVoice) break;
+    }
+    if (!spanishVoice) spanishVoice = voices.find(v => v.lang.startsWith('es-ES'));
+    if (!spanishVoice) spanishVoice = voices.find(v => v.lang.startsWith('es'));
+  }
+
+  if (spanishVoice) {
+    utt.voice = spanishVoice;
+    utt.lang = spanishVoice.lang;
+  }
+
+  btn.classList.add('playing');
+  currentUtterance = utt;
+
+  utt.onend = () => { btn.classList.remove('playing'); currentUtterance = null; };
+  utt.onerror = () => { btn.classList.remove('playing'); currentUtterance = null; };
+
+  window.speechSynthesis.speak(utt);
+}
+
+// ─── Voice Selection Logic ───
+function populateVoiceList() {
+  if (!('speechSynthesis' in window)) return;
+  const voices = window.speechSynthesis.getVoices();
+  const select = document.getElementById('voice-select');
+  if (!select) return;
+  
+  const selected = select.value || preferredVoice;
+  select.innerHTML = '<option value="">Auto-detect (Best Available)</option>';
+  
+  // Sort and add Spanish voices
+  const esVoices = voices.filter(v => v.lang.startsWith('es')).sort((a,b) => a.name.localeCompare(b.name));
+  esVoices.forEach(v => {
+    const opt = document.createElement('option');
+    opt.textContent = `${v.name} (${v.lang})`;
+    opt.value = v.name;
+    select.appendChild(opt);
+  });
+  
+  if (selected && esVoices.some(v => v.name === selected)) {
+    select.value = selected;
+  }
+}
+
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = populateVoiceList;
+  window.addEventListener('load', () => {
+     window.speechSynthesis.getVoices();
+     populateVoiceList();
+     document.getElementById('voice-select').addEventListener('change', (e) => {
+       preferredVoice = e.target.value;
+       saveState();
+     });
+  });
+}
+
+// ─── Process words in a sentence (mark seen & add to SRS) ───
+function processSentenceWords(sentenceText) {
+  const tokens = tokenize(sentenceText);
+  tokens.forEach(t => {
+    const info = lookupWord(t);
+    if (info) {
+      const w = stripPunctuation(t).toLowerCase();
+      if (!seenWords.has(w)) {
+        seenWords.add(w);
+        addToSRS(info, sentenceText);
+      }
+    }
+  });
+}
+
+// ─── Mark sentence as read ───
+function markRead(index, btn) {
+  if (readSet.has(index)) return;
+  
+  // Stop audio if playing
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
+  readSet.add(index);
+  processSentenceWords(SENTENCES[index].spanish);
+  saveState();
+  
+  const card = btn.closest('.sentence-card');
+  const translationVisible = !card.querySelector('.translation').classList.contains('hidden');
+  
+  // Re-render card to remove word highlights (since words are now 'seen')
+  card.outerHTML = renderSentenceCard(SENTENCES[index], index);
+  
+  // Restore translation state
+  if (translationVisible) {
+    const newCard = document.querySelector(`.sentence-card[data-index="${index}"]`);
+    if (newCard) {
+      newCard.querySelector('.translation').classList.remove('hidden');
+      newCard.querySelector('.reveal-btn').textContent = 'Hide translation';
+    }
+  }
+
+  const pct = (readSet.size / SENTENCES.length) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+// ─── Toggle translation visibility ───
+function toggleTranslation(btn) {
+  const tr = btn.nextElementSibling;
+  if (tr.classList.contains('hidden')) {
+    tr.classList.remove('hidden');
+    btn.textContent = 'Hide translation';
+  } else {
+    tr.classList.add('hidden');
+    btn.textContent = 'Show translation';
+  }
+}
+
+// ─── Find next unread ───
+function findNextUnread() {
+  for (let i = 0; i < SENTENCES.length; i++) {
+    if (!readSet.has(i)) {
+      const pg = Math.floor(i / SENTENCES_PER_PAGE) + 1;
+      if (pg !== currentPage) {
+        currentPage = pg;
+        renderPage();
+      }
+      setTimeout(() => {
+        const card = document.querySelector(`[data-index="${i}"]`);
+        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+      return;
+    }
+  }
+  showToast('All sentences have been read! 🎉');
+}
+
+// ─── Mark all on current page as read ───
+function markPageRead() {
+  const start = (currentPage - 1) * SENTENCES_PER_PAGE;
+  const end = Math.min(start + SENTENCES_PER_PAGE, SENTENCES.length);
+  for (let i = start; i < end; i++) {
+    readSet.add(i);
+    processSentenceWords(SENTENCES[i].spanish);
+  }
+  saveState();
+  renderPage();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SRS LOGIC
+// ═══════════════════════════════════════════════════════════════
+
+function getDueCards() {
+  const now = Date.now();
+  return srsCards.filter(c => c.dueDate <= now);
+}
+
+function updateSrsStats() {
+  const due = getDueCards().length;
+  const learned = srsCards.filter(c => c.interval > 0).length;
+  document.getElementById('stat-due').textContent = due;
+  document.getElementById('stat-learned').textContent = learned;
+  document.getElementById('stat-total').textContent = srsCards.length;
+}
+
+function renderSrsCard() {
+  const dueCards = getDueCards();
+  updateSrsStats();
+
+  const area = document.getElementById('srs-card-area');
+
+  if (dueCards.length === 0) {
+    area.innerHTML = `<div class="srs-empty">
+      <div class="empty-icon">${srsCards.length === 0 ? '🌿' : '🎉'}</div>
+      <h3>${srsCards.length === 0 ? 'Nothing to review yet' : 'All caught up!'}</h3>
+      <p>${srsCards.length === 0 ? 'Start reading sentences to add words & conjugations here' : 'Come back later or keep reading to add more words'}</p>
+    </div>`;
+    document.getElementById('queue-list').classList.remove('show');
+    return;
+  }
+
+  // Find next due card
+  currentSrsIndex = srsCards.indexOf(dueCards[0]);
+  const card = dueCards[0];
+
+  let backContent = '';
+  if (card.type === 'conjugation' && card.infinitive) {
+    const vd = VERBS[card.infinitive];
+    const tenseKeys = [
+      { key: 'conjugations', label: 'Present' },
+      { key: 'preterite',    label: 'Preterite' },
+      { key: 'imperfect',    label: 'Imperfect' }
+    ];
+    let allTables = '';
+    tenseKeys.forEach(({ key, label }) => {
+      if (!vd[key]) return;
+      let conjRows = '';
+      Object.entries(vd[key]).forEach(([pro, form]) => {
+        const hl = (form === card.id) ? ' hl' : '';
+        conjRows += `<div class="ct-row"><span class="ct-pro">${pro}</span><span class="ct-form${hl}">${form}</span></div>`;
+      });
+      allTables += `<div style="margin-bottom:8px">
+        <div style="font-weight:600;color:var(--sage);margin-bottom:3px;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px">${label}</div>
+        ${conjRows}
+      </div>`;
+    });
+    backContent = `
+      <div class="card-answer-label">Meaning</div>
+      <div class="card-answer">${vd.meaning}</div>
+      <div class="conj-table-mini" style="max-height:180px;overflow-y:auto">${allTables}</div>`;
+  } else {
+    backContent = `
+      <div class="card-answer-label">Meaning</div>
+      <div class="card-answer">${card.back}</div>`;
+  }
+
+  area.innerHTML = `
+    <div class="flashcard-wrap">
+      <div class="flashcard" id="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="card-front">
+          <div class="card-type-badge ${card.type === 'conjugation' ? 'conj-badge' : ''}">${card.type}</div>
+          <div class="card-word">${card.front}</div>
+          <div class="card-hint">Tap to reveal</div>
+        </div>
+        <div class="card-back">
+          ${backContent}
+          <div class="card-example">« ${card.example} »</div>
+        </div>
+      </div>
+    </div>
+    <div class="srs-actions" id="srs-actions">
+      <button class="srs-btn again" onclick="rateSrs(1)">Again</button>
+      <button class="srs-btn hard" onclick="rateSrs(2)">Hard</button>
+      <button class="srs-btn good" onclick="rateSrs(3)">Good</button>
+      <button class="srs-btn easy" onclick="rateSrs(4)">Easy</button>
+    </div>
+    <p style="text-align:center;font-size:.7rem;color:#b8a898;margin-top:10px">${getDueCards().length} cards due</p>`;
+
+  // Show upcoming queue
+  renderQueue();
+}
+
+function renderQueue() {
+  const dueCards = getDueCards();
+  const upcoming = dueCards.slice(0, 6);
+  const list = document.getElementById('queue-list');
+  const items = document.getElementById('queue-items');
+
+  if (dueCards.length <= 1) {
+    list.classList.remove('show');
+    return;
+  }
+  list.classList.add('show');
+
+  items.innerHTML = upcoming.map(c =>
+    `<div class="queue-item">
+      <span class="qi-word">${c.id}</span>
+      <span class="qi-meaning">${c.back}</span>
+      <span class="qi-due">${c.type === 'conjugation' ? '🔀 conj' : '📝 vocab'}</span>
+    </div>`
+  ).join('');
+}
+
+// Simple SM-2-inspired spacing
+function rateSrs(quality) {
+  if (currentSrsIndex < 0) return;
+  const card = srsCards[currentSrsIndex];
+
+  const intervals = [0, 1, 3, 7, 14, 30, 60];
+
+  if (quality === 1) {
+    // Again: reset
+    card.interval = 0;
+    card.dueDate = Date.now() + 60000; // 1 minute
+  } else {
+    // Advance interval
+    let step = intervals.indexOf(card.interval);
+    if (step < 0) step = 0;
+
+    if (quality === 2) {
+      // Hard: stay or go back one
+      step = Math.max(0, step);
+    } else if (quality === 3) {
+      // Good: advance one
+      step = Math.min(step + 1, intervals.length - 1);
+    } else {
+      // Easy: advance two
+      step = Math.min(step + 2, intervals.length - 1);
+    }
+
+    card.interval = intervals[step];
+    const daysMs = card.interval * 24 * 60 * 60 * 1000;
+    card.dueDate = Date.now() + (daysMs || 60000);
+  }
+
+  card.lastReview = Date.now();
+  card.ease = quality;
+  saveState();
+
+  // Animate
+  const fc = document.getElementById('flashcard');
+  if (fc) {
+    fc.style.transition = 'transform .2s, opacity .2s';
+    fc.style.transform = 'scale(0.95)';
+    fc.style.opacity = '0.4';
+    setTimeout(() => {
+      renderSrsCard();
+    }, 200);
+  } else {
+    renderSrsCard();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════════════════════════════
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + tab).classList.add('active');
+
+    if (tab === 'srs') renderSrsCard();
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// CONTROLS
+// ═══════════════════════════════════════════════════════════════
+
+document.getElementById('btn-find-unread').addEventListener('click', findNextUnread);
+document.getElementById('btn-mark-all').addEventListener('click', markPageRead);
+
+document.getElementById('page-input').addEventListener('change', function() {
+  const v = parseInt(this.value);
+  if (v >= 1 && v <= totalPages) {
+    currentPage = v;
+    renderPage();
+  }
+});
+document.getElementById('page-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') this.dispatchEvent(new Event('change'));
+});
+
+// ═══════════════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════════════
+let toastTimeout;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+loadState();
+renderPage();
+</script>
+</body>
+</html>
